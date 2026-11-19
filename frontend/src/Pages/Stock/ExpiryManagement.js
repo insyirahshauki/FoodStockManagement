@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { StockService } from "../../Services/StockService";
 import "./ExpiryManagement.css";
 import DataTable from "../../components/common/DataTable";
-import TableActions from "../../components/common/TableActions";
 const ExpiryManagement = () => {
     const [batches, setBatches] = useState([]);
     const [loading, setLoading] = useState(true);
