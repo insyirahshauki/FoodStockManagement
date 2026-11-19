@@ -73,39 +73,6 @@ function StockExpiryReport() {
 
     }, [search, status, items]);
 
-    const getStatusBadge = (expiryStatus) => {
-
-        switch (expiryStatus) {
-
-            case "EXPIRED":
-                return (
-                    <span className="badge bg-danger">
-                        EXPIRED
-                    </span>
-                );
-
-            case "EXPIRING SOON":
-                return (
-                    <span className="badge bg-warning text-dark">
-                        EXPIRING SOON
-                    </span>
-                );
-
-            case "EXPIRING":
-                return (
-                    <span className="badge bg-warning text-dark">
-                        EXPIRING
-                    </span>
-                );
-
-            default:
-                return (
-                    <span className="badge bg-success">
-                        SAFE
-                    </span>
-                );
-        }
-    };
 
     const formatDaysRemaining = (days) => {
 

@@ -55,20 +55,23 @@ const NewSales = () => {
         );
 
     const orderDetails = useMemo(() => {
-        return items.map(item => {
-            const food = getSelectedFood(item.foodItemId);
-            const quantity = Number(item.quantity || 0);
-            const unitPrice = Number(food?.sellingPrice || 0);
+    return items.map(item => {
+        const food = foodItems.find(
+            food => String(food.foodItemId) === String(item.foodItemId)
+        );
 
-            return {
-                ...item,
-                food,
-                quantity,
-                unitPrice,
-                subtotal: quantity * unitPrice
-            };
-        });
-    }, [items, foodItems]);
+        const quantity = Number(item.quantity || 0);
+        const unitPrice = Number(food?.sellingPrice || 0);
+
+        return {
+            ...item,
+            food,
+            quantity,
+            unitPrice,
+            subtotal: quantity * unitPrice
+        };
+    });
+}, [items, foodItems]);
 
     const totalAmount = orderDetails.reduce(
         (sum, item) => sum + item.subtotal, 0

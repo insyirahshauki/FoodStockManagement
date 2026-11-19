@@ -58,15 +58,6 @@ const AIStockPrediction = () => {
     //     item => item.stockStatus === "INSUFFICIENT_DATA"
     // ).length;
 
-    const predictionProducts = predictions.filter(
-        item => item.stockStatus !== "INSUFFICIENT_DATA"
-    );
-
-    const historyDays = predictions.length > 0
-        ? Math.min(
-            ...predictions.map(item => item.historyDaysAvailable)
-        )
-        : 0;
     return (
         <div className="ai-prediction-page">
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ReportService } from "../../Services/ReportService";
 import StatusBadge from "../../components/common/StatusBadge";
 import SummaryCard from "../../components/common/SummaryCard";
@@ -53,35 +53,35 @@ function SalesReport() {
         return query ? `?${query}` : "";
     };
 
-    const loadReport = async (
-        from = fromDate,
-        to = toDate,
-        order = orderStatus,
-        payment = paymentStatus
-    ) => {
-        try {
-            setLoading(true);
+  const loadReport = useCallback(async (
+    from = fromDate,
+    to = toDate,
+    order = orderStatus,
+    payment = paymentStatus
+) => {
+    try {
+        setLoading(true);
 
-            const params = buildParams(from, to, order, payment);
+        const params = buildParams(from, to, order, payment);
 
-            const [salesData, summaryData] = await Promise.all([
-                ReportService.getSalesReport(params),
-                ReportService.getSalesReportSummary(params)
-            ]);
+        const [salesData, summaryData] = await Promise.all([
+            ReportService.getSalesReport(params),
+            ReportService.getSalesReportSummary(params)
+        ]);
 
-            setSales(salesData);
-            setSummary(summaryData);
+        setSales(salesData);
+        setSummary(summaryData);
 
-        } catch (error) {
-            console.error("Failed to load sales report:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    } catch (error) {
+        console.error("Failed to load sales report:", error);
+    } finally {
+        setLoading(false);
+    }
+}, [fromDate, toDate, orderStatus, paymentStatus]);
 
-    useEffect(() => {
-        loadReport();
-    }, []);
+  useEffect(() => {
+    loadReport();
+}, [loadReport]);
 
     const formatMoney = (amount) => {
 

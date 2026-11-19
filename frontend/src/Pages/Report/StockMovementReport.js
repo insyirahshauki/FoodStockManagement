@@ -111,14 +111,7 @@ function StockMovementReport() {
         .filter(x => x.transactionType === "OUT")
         .reduce((sum, x) => sum + Number(x.quantity || 0), 0);
 
-    const handleSearch = () => {
-        loadReport(
-            search,
-            transactionType,
-            fromDate,
-            toDate
-        );
-    };
+  
 
 
     const handleReset = () => {
