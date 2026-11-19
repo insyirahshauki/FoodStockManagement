@@ -48,15 +48,10 @@ export const SalesService = {
             body: JSON.stringify(paymentData)
         }),
 
-    getSalesOrderById: (id) =>
-        request(`/sales-orders/${id}`),
-
     updateSalesOrderStatus: (id, orderStatus) =>
         request(`/sales-orders/${id}/status`, {
             method: "PUT",
             body: JSON.stringify({ orderStatus })
         }),
 
-    getSalesOrderById: (id) =>
-        request(`/sales-orders/${id}`),
 };

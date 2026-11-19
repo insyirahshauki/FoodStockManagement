@@ -47,8 +47,6 @@ export const StockService = {
     getStockBalanceReport: () =>
         request("/reports/stock-balance"),
 
-    getStockBalanceReport: () =>
-        request("/reports/stock-balance"),
 
     getExpiryManagement: () => request("/expiry-management"),
 
