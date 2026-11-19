@@ -1,3 +1,4 @@
+
 import React, { useCallback, useEffect, useState } from "react";
 import { ReportService } from "../../Services/ReportService";
 import StatusBadge from "../../components/common/StatusBadge";
@@ -6,9 +7,8 @@ import FilterBar from "../../components/common/FilterBar";
 import DataTable from "../../components/common/DataTable";
 
 function SalesReport() {
-    const [report, setReport] = useState(null);
-    const [error, setError] = useState("");
     const [sales, setSales] = useState([]);
+
     const [summary, setSummary] = useState({
         totalOrders: 0,
         completedOrders: 0,
@@ -19,103 +19,102 @@ function SalesReport() {
 
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
-
     const [orderStatus, setOrderStatus] = useState("ALL");
     const [paymentStatus, setPaymentStatus] = useState("ALL");
-
     const [loading, setLoading] = useState(true);
 
-    const buildParams = (
-        from = fromDate,
-        to = toDate,
-        order = orderStatus,
-        payment = paymentStatus
-    ) => {
-        const params = new URLSearchParams();
+    // Load Sales Report
+    const loadReport = useCallback(async () => {
+        try {
+            setLoading(true);
 
-        if (from) {
-            params.append("fromDate", from);
-        }
+            const params = new URLSearchParams();
 
-        if (to) {
-            params.append("toDate", to);
-        }
+            if (fromDate) {
+                params.append("fromDate", fromDate);
+            }
 
-        if (order && order !== "ALL") {
-            params.append("orderStatus", order);
-        }
+            if (toDate) {
+                params.append("toDate", toDate);
+            }
 
-        if (payment && payment !== "ALL") {
-            params.append("paymentStatus", payment);
-        }
+            if (orderStatus !== "ALL") {
+                params.append("orderStatus", orderStatus);
+            }
 
-        const query = params.toString();
+            if (paymentStatus !== "ALL") {
+                params.append("paymentStatus", paymentStatus);
+            }
 
-        return query ? `?${query}` : "";
-    };
+            const query = params.toString();
 
-const loadReport = useCallback(async () => {
-    try {
-        setLoading(true);
-        setError("");
+            const response = await ReportService.getSalesReport(
+                query ? `?${query}` : ""
+            );
 
-        const params = new URLSearchParams();
+            // Map API response
+            setSales(response?.sales || []);
 
-        if (fromDate) params.append("fromDate", fromDate);
-        if (toDate) params.append("toDate", toDate);
-        if (orderStatus) params.append("orderStatus", orderStatus);
-        if (paymentStatus) params.append("paymentStatus", paymentStatus);
-
-        const response = await ReportService.getSalesReport(
-            params.toString()
-        );
-
-        setReport(response);
-    } catch (err) {
-        setError(err.message || "Failed to load sales report.");
-    } finally {
-        setLoading(false);
-    }
-}, [fromDate, toDate, orderStatus, paymentStatus]);
-
-  useEffect(() => {
-    loadReport();
-}, [loadReport]);
-
-    const formatMoney = (amount) => {
-
-        return Number(amount || 0)
-            .toLocaleString("en-MY", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+            setSummary({
+                totalOrders: response?.summary?.totalOrders || 0,
+                completedOrders: response?.summary?.completedOrders || 0,
+                totalSales: response?.summary?.totalSales || 0,
+                totalPaid: response?.summary?.totalPaid || 0,
+                totalOutstanding: response?.summary?.totalOutstanding || 0
             });
 
+        } catch (err) {
+            console.error("Failed to load sales report:", err);
+            setSales([]);
+
+            setSummary({
+                totalOrders: 0,
+                completedOrders: 0,
+                totalSales: 0,
+                totalPaid: 0,
+                totalOutstanding: 0
+            });
+
+        } finally {
+            setLoading(false);
+        }
+    }, [fromDate, toDate, orderStatus, paymentStatus]);
+
+    // Load report when filters change
+    useEffect(() => {
+        loadReport();
+    }, [loadReport]);
+
+    // Format currency
+    const formatMoney = (amount) => {
+        return Number(amount || 0).toLocaleString("en-MY", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
     };
 
+    // Reset filters
     const handleReset = () => {
         setFromDate("");
         setToDate("");
         setOrderStatus("ALL");
         setPaymentStatus("ALL");
-        loadReport("", "", "ALL", "ALL");
     };
 
+    // Search
     const handleSearch = () => {
-        loadReport(
-            fromDate,
-            toDate,
-            orderStatus,
-            paymentStatus
-        );
+        loadReport();
     };
 
+    // Table columns
     const columns = [
         {
             key: "orderDate",
             label: "Order Date",
-            render: (row) => (
-                new Date(row.orderDate).toLocaleDateString()
-            )
+            render: (row) =>
+                row.orderDate
+                    ? new Date(row.orderDate).toLocaleDateString()
+                    : "-"
         },
         {
             key: "orderNo",
@@ -136,11 +135,10 @@ const loadReport = useCallback(async () => {
         {
             key: "collectionDate",
             label: "Collection Date",
-            render: (row) => (
+            render: (row) =>
                 row.collectionDate
                     ? new Date(row.collectionDate).toLocaleDateString()
                     : "-"
-            )
         },
         {
             key: "orderStatus",
@@ -172,36 +170,29 @@ const loadReport = useCallback(async () => {
         <div className="page-container">
 
             <div className="page-title">
-                <h2>
-                    Sales Report
-                </h2>
+                <h2>Sales Report</h2>
             </div>
 
             <div className="page-subtitle">
-                <p>
-                    Sales order and payment summary
-                </p>
+                <p>Sales order and payment summary</p>
             </div>
 
             <div className="card">
                 <div className="container-fluid p-4">
 
                     {/* Header */}
-
                     <div className="d-flex justify-content-between align-items-center mb-4">
                         <button
                             className="btn btn-outline-primary"
                             onClick={loadReport}
+                            disabled={loading}
                         >
                             🔄 Refresh
                         </button>
-
                     </div>
 
                     {/* Summary */}
-
                     <div className="row mb-4">
-
 
                         <SummaryCard
                             title="Total Orders"
@@ -243,15 +234,10 @@ const loadReport = useCallback(async () => {
                             icon="!"
                         />
 
-
-
-
                     </div>
 
                     {/* Filters */}
-
                     <div className="card shadow-sm mb-4">
-
                         <div className="card-body">
 
                             <FilterBar
@@ -259,77 +245,109 @@ const loadReport = useCallback(async () => {
                                 onReset={handleReset}
                             >
                                 <div className="col-md-3">
-                                    <label className="form-label">From Date</label>
+                                    <label className="form-label">
+                                        From Date
+                                    </label>
+
                                     <input
                                         type="date"
                                         className="form-control"
                                         value={fromDate}
-                                        onChange={(e) => setFromDate(e.target.value)}
+                                        onChange={(e) =>
+                                            setFromDate(e.target.value)
+                                        }
                                     />
                                 </div>
 
                                 <div className="col-md-3">
-                                    <label className="form-label">To Date</label>
+                                    <label className="form-label">
+                                        To Date
+                                    </label>
+
                                     <input
                                         type="date"
                                         className="form-control"
                                         value={toDate}
-                                        onChange={(e) => setToDate(e.target.value)}
+                                        onChange={(e) =>
+                                            setToDate(e.target.value)
+                                        }
                                     />
                                 </div>
 
                                 <div className="col-md-3">
-                                    <label className="form-label">Order Status</label>
+                                    <label className="form-label">
+                                        Order Status
+                                    </label>
+
                                     <select
                                         className="form-select"
                                         value={orderStatus}
-                                        onChange={(e) => setOrderStatus(e.target.value)}
+                                        onChange={(e) =>
+                                            setOrderStatus(e.target.value)
+                                        }
                                     >
-                                        <option value="ALL">All Status</option>
-                                        <option value="PENDING">Pending</option>
-                                        <option value="CONFIRMED">Confirmed</option>
-                                        <option value="READY">Ready</option>
-                                        <option value="COMPLETED">Completed</option>
-                                        <option value="CANCELLED">Cancelled</option>
+                                        <option value="ALL">
+                                            All Status
+                                        </option>
+                                        <option value="PENDING">
+                                            Pending
+                                        </option>
+                                        <option value="CONFIRMED">
+                                            Confirmed
+                                        </option>
+                                        <option value="READY">
+                                            Ready
+                                        </option>
+                                        <option value="COMPLETED">
+                                            Completed
+                                        </option>
+                                        <option value="CANCELLED">
+                                            Cancelled
+                                        </option>
                                     </select>
                                 </div>
 
                                 <div className="col-md-3">
-                                    <label className="form-label">Payment Status</label>
+                                    <label className="form-label">
+                                        Payment Status
+                                    </label>
+
                                     <select
                                         className="form-select"
                                         value={paymentStatus}
-                                        onChange={(e) => setPaymentStatus(e.target.value)}
+                                        onChange={(e) =>
+                                            setPaymentStatus(e.target.value)
+                                        }
                                     >
-                                        <option value="ALL">All Payments</option>
-                                        <option value="UNPAID">Unpaid</option>
-                                        <option value="PARTIAL">Partial</option>
-                                        <option value="PAID">Paid</option>
+                                        <option value="ALL">
+                                            All Payments
+                                        </option>
+                                        <option value="UNPAID">
+                                            Unpaid
+                                        </option>
+                                        <option value="PARTIAL">
+                                            Partial
+                                        </option>
+                                        <option value="PAID">
+                                            Paid
+                                        </option>
                                     </select>
                                 </div>
 
                             </FilterBar>
                         </div>
-
                     </div>
 
                     {/* Sales Table */}
-
                     <div className="card shadow-sm">
-
                         <div className="card-body">
 
                             {loading ? (
-
                                 <div className="text-center py-4">
                                     Loading sales report...
                                 </div>
-
                             ) : (
-
                                 <div className="table-responsive">
-
-
                                     <DataTable
                                         columns={columns}
                                         data={sales}
@@ -338,21 +356,16 @@ const loadReport = useCallback(async () => {
                                         defaultPageSize={10}
                                         emptyMessage="No sales records found."
                                     />
-
-
                                 </div>
-
                             )}
 
                         </div>
-
                     </div>
 
                 </div>
             </div>
 
         </div>
-
     );
 }
 
