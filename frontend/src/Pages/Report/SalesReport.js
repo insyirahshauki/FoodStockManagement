@@ -6,7 +6,8 @@ import FilterBar from "../../components/common/FilterBar";
 import DataTable from "../../components/common/DataTable";
 
 function SalesReport() {
-
+    const [report, setReport] = useState(null);
+    const [error, setError] = useState("");
     const [sales, setSales] = useState([]);
     const [summary, setSummary] = useState({
         totalOrders: 0,
