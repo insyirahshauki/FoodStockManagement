@@ -51,27 +51,27 @@ const SideBar = ({ closeSidebar }) => {
                 { title: "Stock Expiry Report", path: "/reports/stock-expiry" },
                 { title: "Sales Report", path: "/reports/sales" }
             ]
-        },
-          {
-            title: "AI",
-            icon: "bi-stars",
-            submenu: [
-                { title: "AI Stock Prediction", path: "/ai-stock-prediction"},
-                { title: "AI Sales Forecasting", path: "/ai-sales-forecast" },
-                { title: "AI Expiry Risk Analysis", path: "/ai-expiry-risk" },
-                { title: "AI Production Planning", path: "/ai-production-planning" }
-            ]
-        },
- {
-    title: "AI Business Assistant",
-    path: "/ai-business-assistant",
-    icon: "bi-robot"
-},
- {
-    title: "Smart Alerts",
-    path: "/smart-alerts",
-    icon: "bi-robot"
-},
+        }
+//           {
+//             title: "AI",
+//             icon: "bi-stars",
+//             submenu: [
+//                 { title: "AI Stock Prediction", path: "/ai-stock-prediction"},
+//                 { title: "AI Sales Forecasting", path: "/ai-sales-forecast" },
+//                 { title: "AI Expiry Risk Analysis", path: "/ai-expiry-risk" },
+//                 { title: "AI Production Planning", path: "/ai-production-planning" }
+//             ]
+//         },
+//  {
+//     title: "AI Business Assistant",
+//     path: "/ai-business-assistant",
+//     icon: "bi-robot"
+// },
+//  {
+//     title: "Smart Alerts",
+//     path: "/smart-alerts",
+//     icon: "bi-robot"
+// },
 
     ];
 
