@@ -53,27 +53,25 @@ function SalesReport() {
         return query ? `?${query}` : "";
     };
 
-  const loadReport = useCallback(async (
-    from = fromDate,
-    to = toDate,
-    order = orderStatus,
-    payment = paymentStatus
-) => {
+const loadReport = useCallback(async () => {
     try {
         setLoading(true);
+        setError("");
 
-        const params = buildParams(from, to, order, payment);
+        const params = new URLSearchParams();
 
-        const [salesData, summaryData] = await Promise.all([
-            ReportService.getSalesReport(params),
-            ReportService.getSalesReportSummary(params)
-        ]);
+        if (fromDate) params.append("fromDate", fromDate);
+        if (toDate) params.append("toDate", toDate);
+        if (orderStatus) params.append("orderStatus", orderStatus);
+        if (paymentStatus) params.append("paymentStatus", paymentStatus);
 
-        setSales(salesData);
-        setSummary(summaryData);
+        const response = await ReportService.getSalesReport(
+            params.toString()
+        );
 
-    } catch (error) {
-        console.error("Failed to load sales report:", error);
+        setReport(response);
+    } catch (err) {
+        setError(err.message || "Failed to load sales report.");
     } finally {
         setLoading(false);
     }
