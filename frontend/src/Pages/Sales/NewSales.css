@@ -1,0 +1,36 @@
+.new-sales-page {
+    padding: 20px;
+}
+
+.new-sales-page .card {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.new-sales-page .card-header {
+    padding: 16px 20px;
+}
+
+.new-sales-page .card-body {
+    padding: 20px;
+}
+
+.new-sales-page .form-label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.new-sales-page .table th {
+    font-size: 13px;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.new-sales-page .table td {
+    vertical-align: middle;
+}
+
+.new-sales-page .badge {
+    padding: 7px 12px;
+    font-weight: 500;
+}

@@ -1,0 +1,39 @@
+
+# React dependencies
+node_modules/
+frontend/node_modules/
+
+# React build files
+frontend/build/
+frontend/dist/
+
+# Java Maven build files
+**/target/
+**/build/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Uploaded files and database backups
+uploads/
+*.bacpac
+*.bak
+*.mdf
+*.ldf
+
+# Application secrets
+application-local.properties
+application-secret.properties
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db

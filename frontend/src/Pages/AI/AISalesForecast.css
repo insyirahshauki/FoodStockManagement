@@ -1,0 +1,62 @@
+.ai-forecast-page {
+    width: 100%;
+}
+
+.ai-forecast-card {
+    position: relative;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-forecast-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+}
+
+.ai-forecast-card .card-body {
+    position: relative;
+    min-height: 115px;
+    padding: 20px;
+}
+
+.ai-forecast-icon {
+    position: absolute;
+    right: 20px;
+    top: 35px;
+    font-size: 28px;
+    color: #6c757d;
+    opacity: 0.65;
+}
+
+.ai-forecast-table-card {
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ai-forecast-recommendation {
+    min-width: 250px;
+    max-width: 380px;
+    white-space: normal;
+    font-size: 0.875rem;
+}
+
+.ai-forecast-page .table th {
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+
+.ai-forecast-page .table td {
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .ai-forecast-page .ai-forecast-card {
+        margin-bottom: 4px;
+    }
+
+    .ai-forecast-page h4 {
+        font-size: 1.2rem;
+    }
+}

@@ -1,0 +1,46 @@
+
+.stock-in-page {
+    padding: 24px;
+}
+
+.stock-in-page .page-header {
+    margin-bottom: 24px;
+}
+
+.stock-in-page .page-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.stock-in-page .page-header p {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.stock-in-page .card {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+}
+
+.stock-in-page .card-header {
+    padding: 18px 20px;
+}
+
+.stock-in-page .card-body {
+    padding: 24px;
+}
+
+.stock-in-page .form-label {
+    font-weight: 500;
+}
+
+@media (max-width: 576px) {
+    .stock-in-page {
+        padding: 15px;
+    }
+
+    .stock-in-page .card-body {
+        padding: 16px;
+    }
+}

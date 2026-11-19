@@ -1,0 +1,27 @@
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+
+    --text-color: #212529;
+    --muted-color: #6c757d;
+
+    --background-color: #f8f9fa;
+    --card-background: #ffffff;
+    --border-color: #dee2e6;
+
+    --border-radius: 8px;
+    --card-radius: 10px;
+
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+}

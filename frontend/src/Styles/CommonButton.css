@@ -1,0 +1,38 @@
+
+/* Common Button */
+
+.btn {
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    transition: all 0.2s ease;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.btn i {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color, #0d6efd);
+    border-color: var(--primary-color, #0d6efd);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+.btn-lg {
+    padding: 10px 20px;
+    font-size: 15px;
+}

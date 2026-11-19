@@ -1,0 +1,218 @@
+
+.stock-balance-page {
+    padding: 24px;
+}
+
+.stock-balance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 12px;
+}
+
+.stock-balance-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.stock-balance-header p {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.stock-summary-card {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+}
+
+.stock-summary-card p {
+    color: #6c757d;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.stock-summary-card h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.summary-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.icon-total {
+    background: #e8f0fe;
+    color: #2563eb;
+}
+
+.icon-quantity {
+    background: #f0eaff;
+    color: #7c3aed;
+}
+
+.icon-in {
+    background: #e6f7ed;
+    color: #198754;
+}
+
+.icon-low {
+    background: #fff3cd;
+    color: #b58105;
+}
+
+.icon-out {
+    background: #fce8e8;
+    color: #dc3545;
+}
+
+.stock-balance-card {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+}
+
+.stock-balance-card .card-header {
+    padding: 18px 20px;
+}
+
+.stock-balance-card .card-body {
+    padding: 20px;
+}
+
+.stock-balance-card thead th {
+    background: #f8f9fa;
+    color: #495057;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.stock-status-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.stock-status-in {
+    background: #e6f7ed;
+    color: #198754;
+}
+
+.stock-status-low {
+    background: #fff3cd;
+    color: #997404;
+}
+
+.stock-status-out {
+    background: #fce8e8;
+    color: #dc3545;
+}
+
+/* Batch modal */
+.stock-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.stock-modal {
+    width: 100%;
+    max-width: 950px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+.stock-modal-header,
+.stock-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.stock-modal-footer {
+    justify-content: flex-end;
+    border-top: 1px solid #e9ecef;
+    border-bottom: none;
+}
+
+.stock-modal-body {
+    padding: 20px;
+}
+
+.batch-info {
+    height: 100%;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.batch-info small {
+    color: #6c757d;
+}
+
+.batch-info h5 {
+    margin: 8px 0 0;
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .stock-balance-page {
+        padding: 15px;
+    }
+
+    .stock-balance-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .stock-balance-card .card-body {
+        padding: 12px;
+    }
+
+    .stock-summary-card {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .summary-icon {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        font-size: 17px;
+    }
+
+    .stock-summary-card h4 {
+        font-size: 18px;
+    }
+
+    .stock-summary-card p {
+        font-size: 11px;
+    }
+}
