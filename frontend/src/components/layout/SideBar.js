@@ -1,7 +1,24 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const SideBar = ({ closeSidebar }) => {
+
+    // Submenu states
+    const [expandedMenus, setExpandedMenus] = useState({
+        "Food Management": true,
+        "Stock Management": true,
+        "Sales Management": true,
+        "Reports": true
+    });
+
+    // Toggle submenu
+    const toggleSubmenu = (title) => {
+        setExpandedMenus(prev => ({
+            ...prev,
+            [title]: !prev[title]
+        }));
+    };
 
     const menuItems = [
         {
@@ -52,40 +69,27 @@ const SideBar = ({ closeSidebar }) => {
                 { title: "Sales Report", path: "/reports/sales" }
             ]
         }
-//           {
-//             title: "AI",
-//             icon: "bi-stars",
-//             submenu: [
-//                 { title: "AI Stock Prediction", path: "/ai-stock-prediction"},
-//                 { title: "AI Sales Forecasting", path: "/ai-sales-forecast" },
-//                 { title: "AI Expiry Risk Analysis", path: "/ai-expiry-risk" },
-//                 { title: "AI Production Planning", path: "/ai-production-planning" }
-//             ]
-//         },
-//  {
-//     title: "AI Business Assistant",
-//     path: "/ai-business-assistant",
-//     icon: "bi-robot"
-// },
-//  {
-//     title: "Smart Alerts",
-//     path: "/smart-alerts",
-//     icon: "bi-robot"
-// },
-
     ];
 
     return (
         <div className="sidebar">
+
+            {/* Sidebar Brand */}
             <div className="sidebar-brand">
                 <i className="bi bi-box-seam me-2"></i>
                 <span>Food Stock</span>
             </div>
 
+            {/* Sidebar Menu */}
             <div className="sidebar-menu">
-                {menuItems.map((item, index) => (
-                    <div key={index}>
+
+                {menuItems.map((item) => (
+
+                    <div className="sidebar-group" key={item.title}>
+
+                        {/* Single Navigation Link */}
                         {item.path ? (
+
                             <NavLink
                                 to={item.path}
                                 end={item.path === "/"}
@@ -97,29 +101,57 @@ const SideBar = ({ closeSidebar }) => {
                                 <i className={`bi ${item.icon}`}></i>
                                 <span>{item.title}</span>
                             </NavLink>
-                        ) : (
-                            <>
-                                <div className="sidebar-heading">
-                                    <i className={`bi ${item.icon}`}></i>
-                                    <span>{item.title}</span>
-                                </div>
 
-                                {item.submenu.map((sub, subIndex) => (
-                                    <NavLink
-                                        key={subIndex}
-                                        to={sub.path}
-                                        onClick={closeSidebar}
-                                        className={({ isActive }) =>
-                                            `sidebar-sublink ${isActive ? "active" : ""}`
-                                        }
-                                    >
-                                        {sub.title}
-                                    </NavLink>
-                                ))}
+                        ) : (
+
+                            <>
+                                {/* Parent Menu */}
+                                <button
+                                    type="button"
+                                    className="sidebar-heading"
+                                    onClick={() => toggleSubmenu(item.title)}
+                                    aria-expanded={!!expandedMenus[item.title]}
+                                >
+                                    <i className={`bi ${item.icon}`}></i>
+
+                                    <span>{item.title}</span>
+
+                                    <i className={`bi bi-chevron-down submenu-arrow ${
+                                        expandedMenus[item.title] ? "rotated" : ""
+                                    }`}></i>
+                                </button>
+
+                                {/* Animated Submenu */}
+                                <div className={`submenu-container ${
+                                    expandedMenus[item.title] ? "expanded" : ""
+                                }`}>
+                                    <div className="submenu-inner">
+
+                                        {item.submenu.map((sub) => (
+
+                                            <NavLink
+                                                key={sub.path}
+                                                to={sub.path}
+                                                onClick={closeSidebar}
+                                                className={({ isActive }) =>
+                                                    `sidebar-sublink ${isActive ? "active" : ""}`
+                                                }
+                                            >
+                                                {sub.title}
+                                            </NavLink>
+
+                                        ))}
+
+                                    </div>
+                                </div>
                             </>
+
                         )}
+
                     </div>
+
                 ))}
+
             </div>
         </div>
     );
