@@ -520,13 +520,13 @@ function FoodItem() {
                                                     required
                                                 >
                                                     <option value="">Select Unit</option>
-                                                    <option value="Piece">Piece</option>
-                                                    <option value="Pack">Pack</option>
-                                                    <option value="Tray">Tray</option>
-                                                    <option value="Box">Box</option>
+                                                    <option value="Pcs">Pcs</option>
+                                                    <option value="Small">Small</option>
+                                                    <option value="Big">Big</option>
+                                                    {/* <option value="Box">Box</option>
                                                     <option value="Slice">Slice</option>
                                                     <option value="Bottle">Bottle</option>
-                                                    <option value="Set">Set</option>
+                                                    <option value="Set">Set</option> */}
                                                 </select>
                                             </div>
 

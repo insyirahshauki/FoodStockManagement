@@ -8,7 +8,7 @@ const StockOut = () => {
     const [selectedFoodItem, setSelectedFoodItem] = useState(null);
 
     const [quantity, setQuantity] = useState("");
-    const [referenceNo, setReferenceNo] = useState("");
+    //const [referenceNo, setReferenceNo] = useState("");
     const [notes, setNotes] = useState("");
 
     const [loading, setLoading] = useState(true);
@@ -62,7 +62,7 @@ const StockOut = () => {
     const resetForm = () => {
         setSelectedFoodItem(null);
         setQuantity("");
-        setReferenceNo("");
+       // setReferenceNo("");
         setNotes("");
         setSuccessResult(null);
         setError("");
@@ -102,7 +102,7 @@ const StockOut = () => {
         const payload = {
             foodItemId: selectedFoodItem.foodItemId,
             quantity: requestedQuantity,
-            referenceNo: referenceNo.trim() || null,
+            //referenceNo: referenceNo.trim() || null,
             notes: notes.trim() || null,
         };
 
@@ -127,7 +127,7 @@ const StockOut = () => {
             setSelectedFoodItem(updatedItem || null);
 
             setQuantity("");
-            setReferenceNo("");
+            //setReferenceNo("");
             setNotes("");
 
         } catch (err) {
@@ -172,9 +172,9 @@ const StockOut = () => {
                                 </strong>
                             </p>
 
-                            <p className="mb-0">
+                            {/* <p className="mb-0">
                                 Reference: {successResult.referenceNo || "-"}
-                            </p>
+                            </p> */}
                         </div>
                     )}
 
@@ -301,7 +301,7 @@ const StockOut = () => {
                                             </div>
                                         )}
 
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label className="form-label">
                                                 Reference Number
                                             </label>
@@ -315,7 +315,7 @@ const StockOut = () => {
                                                 placeholder="e.g. SO-2026-001"
                                                 disabled={saving}
                                             />
-                                        </div>
+                                        </div> */}
 
                                         <div className="mb-3">
                                             <label className="form-label">Notes</label>
