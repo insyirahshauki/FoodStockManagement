@@ -52,8 +52,10 @@ const StockTransaction = () => {
         const matchesSearch =
             (transaction.foodName || "").toLowerCase().includes(keyword) ||
             (transaction.code || "").toLowerCase().includes(keyword) ||
-            (transaction.batchNo || "").toLowerCase().includes(keyword) ||
-            (transaction.referenceNo || "").toLowerCase().includes(keyword);
+            (transaction.batchNo || "").toLowerCase().includes(keyword) 
+            // ||
+            // (transaction.referenceNo || "").toLowerCase().includes(keyword)
+            ;
 
         const matchesType =
             !transactionType ||
@@ -99,15 +101,15 @@ const StockTransaction = () => {
             label: "Date",
             render: (row) => currencyDate(row.transactionDate)
         },
-        {
-            key: "referenceNo",
-            label: "Reference No.",
-            render: (row) => (
-                <span className="fw-semibold">
-                    {row.referenceNo || "-"}
-                </span>
-            )
-        },
+        // {
+        //     key: "referenceNo",
+        //     label: "Reference No.",
+        //     render: (row) => (
+        //         <span className="fw-semibold">
+        //             {row.referenceNo || "-"}
+        //         </span>
+        //     )
+        // },
         {
             key: "foodName",
             label: "Product",
@@ -254,7 +256,7 @@ const StockTransaction = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Search product, code, batch or reference..."
+                                        placeholder="Search product, code, or batch..."
                                         value={search}
                                         onChange={(e) => setSearch(e.target.value)}
                                     />

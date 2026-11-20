@@ -53,7 +53,7 @@ const StockTransactionHistory = () => {
                 transaction.foodName,
                 transaction.code,
                 transaction.batchNo,
-                transaction.referenceNo,
+                //transaction.referenceNo,
                 transaction.notes
             ].some(value =>
                 (value || "").toLowerCase().includes(keyword)
@@ -147,11 +147,11 @@ const StockTransactionHistory = () => {
                 </span>
             )
         },
-        {
-            key: "referenceNo",
-            label: "Reference No.",
-            render: (row) => row.referenceNo || "-"
-        },
+        // {
+        //     key: "referenceNo",
+        //     label: "Reference No.",
+        //     render: (row) => row.referenceNo || "-"
+        // },
         {
             key: "notes",
             label: "Notes",

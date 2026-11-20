@@ -294,7 +294,7 @@ function Dashboard() {
                                         <th>Batch No.</th>
                                         <th>Type</th>
                                         <th>Quantity</th>
-                                        <th>Reference No.</th>
+                                        {/* <th>Reference No.</th> */}
                                     </tr>
                                 </thead>
 
@@ -310,7 +310,7 @@ function Dashboard() {
                                                 </span>
                                             </td>
                                             <td>{item.quantity}</td>
-                                            <td>{item.referenceNo || "-"}</td>
+                                            {/* <td>{item.referenceNo || "-"}</td> */}
                                         </tr>
                                     ))}
                                 </tbody>

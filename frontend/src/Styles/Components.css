@@ -86,7 +86,7 @@
     white-space: nowrap;
 }
 
-.table-actions .btn {
+/* .table-actions .btn {
     width: 32px;
     height: 32px;
     padding: 0;
@@ -96,7 +96,7 @@
     border-radius: 6px;
     font-size: 13px;
     transition: all 0.2s ease;
-}
+} */
 
 .table-actions .btn:hover {
     transform: translateY(-2px);
