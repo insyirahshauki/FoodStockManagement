@@ -1,3 +1,4 @@
+
 package com.example.FoodStockManagement.dto.Food;
 
 import java.math.BigDecimal;
@@ -14,5 +15,7 @@ public record FoodItemResponse(
         BigDecimal costPrice,
         BigDecimal sellingPrice,
         Boolean isActive,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        String imageUrl,
+        String imagePublicId
 ) {}

@@ -34,18 +34,81 @@ public class FoodItem {
     @Column(name = "CreatedAt", insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    public Integer getFoodItemId() { return foodItemId; }
-    public FoodCategory getCategory() { return category; }
-    public void setCategory(FoodCategory value) { category = value; }
-    public String getCode() { return code; }
-    public void setCode(String value) { code = value; }
-    public String getFoodName() { return foodName; }
-    public void setFoodName(String value) { foodName = value; }
-    public String getUnit() { return unit; }
-    public void setUnit(String value) { unit = value; }
-    public Integer getMinimumStock() { return minimumStock; }
-    public void setMinimumStock(Integer value) { minimumStock = value; }
-    public Boolean getIsActive() { return isActive; }
-    public void setIsActive(Boolean value) { isActive = value; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
+    @Column(name = "ImageUrl", length = 500)
+    private String imageUrl;
+
+    @Column(name = "ImagePublicId", length = 255)
+    private String imagePublicId;
+
+    public Integer getFoodItemId() {
+        return foodItemId;
+    }
+
+    public FoodCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(FoodCategory value) {
+        category = value;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String value) {
+        code = value;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String value) {
+        foodName = value;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String value) {
+        unit = value;
+    }
+
+    public Integer getMinimumStock() {
+        return minimumStock;
+    }
+
+    public void setMinimumStock(Integer value) {
+        minimumStock = value;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean value) {
+        isActive = value;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImagePublicId() {
+        return imagePublicId;
+    }
+
+    public void setImagePublicId(String imagePublicId) {
+        this.imagePublicId = imagePublicId;
+    }
 }

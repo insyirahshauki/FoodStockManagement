@@ -1,9 +1,20 @@
+
 import React, { useEffect, useState } from "react";
 import { FoodService } from "../../Services/FoodService";
 import "./FoodCategory.css";
 import DataTable from "../../components/common/DataTable";
 import TableActions from "../../components/common/TableActions";
 import CommonButton from "../../components/common/CommonButton";
+
+// Convert database values to JavaScript Boolean
+const toBoolean = (value) => {
+    if (typeof value === "boolean") return value;
+    if (typeof value === "string") {
+        return value.toUpperCase() === "TRUE";
+    }
+    return false;
+};
+
 function FoodCategory() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,7 +28,8 @@ function FoodCategory() {
 
     const [formData, setFormData] = useState({
         categoryName: "",
-        description: ""
+        description: "",
+        isActive: true
     });
 
     const [error, setError] = useState("");
@@ -35,7 +47,9 @@ function FoodCategory() {
 
             const response = await FoodService.getFoodCategories();
 
-            setCategories(Array.isArray(response) ? response : []);
+            setCategories(
+                Array.isArray(response) ? response : []
+            );
         } catch (err) {
             console.error(err);
             setError("Unable to load food categories.");
@@ -51,7 +65,8 @@ function FoodCategory() {
 
         setFormData({
             categoryName: "",
-            description: ""
+            description: "",
+            isActive: true
         });
 
         setError("");
@@ -65,7 +80,8 @@ function FoodCategory() {
 
         setFormData({
             categoryName: category.categoryName || "",
-            description: category.description || ""
+            description: category.description || "",
+            isActive: toBoolean(category.isActive)
         });
 
         setError("");
@@ -79,6 +95,14 @@ function FoodCategory() {
         setFormData(prev => ({
             ...prev,
             [name]: value
+        }));
+    };
+
+    // Handle Active / Inactive status
+    const handleStatusChange = (e) => {
+        setFormData(prev => ({
+            ...prev,
+            isActive: e.target.value === "true"
         }));
     };
 
@@ -96,10 +120,12 @@ function FoodCategory() {
         try {
             setSaving(true);
             setError("");
+            setSuccess("");
 
             const data = {
                 categoryName: categoryName,
-                description: formData.description.trim()
+                description: formData.description.trim(),
+                isActive: formData.isActive
             };
 
             if (isEdit) {
@@ -159,6 +185,7 @@ function FoodCategory() {
             .includes(search.toLowerCase())
     );
 
+    // Table columns
     const columns = [
         {
             key: "rowNumber",
@@ -178,6 +205,19 @@ function FoodCategory() {
             key: "description",
             label: "Description",
             render: (row) => row.description || "-"
+        },
+        {
+            key: "isActive",
+            label: "Status",
+            render: (row) => {
+                const active = toBoolean(row.isActive);
+
+                return (
+                    <span className={`badge ${active ? "bg-success" : "bg-secondary"}`}>
+                        {active ? "Active" : "Inactive"}
+                    </span>
+                );
+            }
         },
         {
             key: "actions",
@@ -201,9 +241,7 @@ function FoodCategory() {
             </div>
 
             <div className="page-subtitle">
-                <p>
-                    Manage your food categories
-                </p>
+                <p>Manage your food categories</p>
             </div>
 
             <div className="card">
@@ -217,7 +255,6 @@ function FoodCategory() {
                         >
                             Add Category
                         </CommonButton>
-
                     </div>
 
                     {/* Alert Messages */}
@@ -293,7 +330,6 @@ function FoodCategory() {
                                         defaultPageSize={10}
                                         emptyMessage="No categories found."
                                     />
-
                                 </div>
                             )}
 
@@ -308,7 +344,7 @@ function FoodCategory() {
                     {showModal && (
                         <div
                             className="category-modal-backdrop"
-                            onClick={() => setShowModal(false)}
+                            onClick={() => !saving && setShowModal(false)}
                         >
                             <div
                                 className="category-modal"
@@ -338,6 +374,7 @@ function FoodCategory() {
                                             </div>
                                         )}
 
+                                        {/* Category Name */}
                                         <div className="mb-3">
                                             <label className="form-label fw-semibold">
                                                 Category Name
@@ -357,6 +394,7 @@ function FoodCategory() {
                                             />
                                         </div>
 
+                                        {/* Description */}
                                         <div className="mb-3">
                                             <label className="form-label fw-semibold">
                                                 Description
@@ -371,6 +409,32 @@ function FoodCategory() {
                                                 rows="3"
                                                 maxLength="255"
                                             />
+                                        </div>
+
+                                        {/* Status */}
+                                        <div className="mb-3">
+                                            <label className="form-label fw-semibold">
+                                                Status
+                                            </label>
+
+                                            <select
+                                                className="form-select"
+                                                name="isActive"
+                                                value={String(formData.isActive)}
+                                                onChange={handleStatusChange}
+                                            >
+                                                <option value="true">
+                                                    Active
+                                                </option>
+
+                                                <option value="false">
+                                                    Inactive
+                                                </option>
+                                            </select>
+
+                                            <small className="text-muted">
+                                                Inactive categories will be marked as unavailable.
+                                            </small>
                                         </div>
 
                                     </div>
@@ -403,7 +467,6 @@ function FoodCategory() {
             </div>
 
         </div>
-
     );
 }
 

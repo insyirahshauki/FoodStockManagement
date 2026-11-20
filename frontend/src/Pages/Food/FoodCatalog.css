@@ -1,0 +1,720 @@
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.food-brochure-page {
+    min-height: 100vh;
+    background: #f3f4f6;
+    padding: 25px;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+/* =====================================================
+   ACTION BAR
+===================================================== */
+
+.brochure-actions {
+    max-width: 1000px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.brochure-actions button {
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.brochure-back-btn {
+    background: white;
+    color: #374151;
+    border: 1px solid #d1d5db !important;
+}
+
+.brochure-back-btn:hover {
+    background: #f9fafb;
+}
+
+.brochure-download-btn {
+    background: #db5284;
+    color: white;
+}
+
+.brochure-download-btn:hover {
+    background: #c43d70;
+}
+
+.brochure-download-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   MAIN BROCHURE
+===================================================== */
+
+.food-brochure {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #fffaf6;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   COVER
+===================================================== */
+
+.brochure-cover {
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px 25px;
+
+    text-align: center;
+
+    background-color: #fff4ed;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            rgba(239, 166, 183, 0.18) 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            -45deg,
+            rgba(239, 166, 183, 0.18) 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            45deg,
+            transparent 75%,
+            rgba(239, 166, 183, 0.18) 75%
+        ),
+        linear-gradient(
+            -45deg,
+            transparent 75%,
+            rgba(239, 166, 183, 0.18) 75%
+        );
+
+    background-size: 30px 30px;
+}
+
+.brochure-cover-content {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 750px;
+
+    margin: auto;
+    padding: 35px 25px;
+
+    border: 3px solid #f4bd75;
+    border-radius: 45px;
+
+    background: rgba(255, 250, 244, 0.96);
+
+    outline: 2px dashed #e9a3a3;
+    outline-offset: -12px;
+}
+
+.brochure-logo {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffe0e9;
+    color: #db5284;
+
+    font-size: 38px;
+}
+
+.brochure-small-title {
+    margin: 0 0 12px;
+
+    color: #b66c64;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.brochure-cover h1 {
+    margin: 0;
+
+    color: #56251f;
+
+    font-family: Georgia, serif;
+    font-style: italic;
+
+    font-size: clamp(35px, 6vw, 62px);
+    font-weight: 800;
+
+    line-height: 1.08;
+}
+
+.brochure-ribbon {
+    display: inline-block;
+
+    margin: 22px auto 12px;
+    padding: 12px 35px;
+
+    border-radius: 8px;
+
+    background: #ef91a9;
+    color: #541e2b;
+
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.brochure-intro {
+    max-width: 500px;
+
+    margin: 12px auto;
+
+    color: #805b51;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.brochure-flower {
+    margin-top: 15px;
+
+    color: #d46c91;
+    font-size: 25px;
+}
+
+/* Decorative Hearts */
+
+.brochure-decoration {
+    position: absolute;
+
+    top: 20px;
+
+    color: #ee6d91;
+    font-size: 55px;
+}
+
+.decoration-left {
+    left: 35px;
+    transform: rotate(-15deg);
+}
+
+.decoration-right {
+    right: 35px;
+    transform: rotate(15deg);
+}
+
+/* =====================================================
+   PRODUCT SECTION
+===================================================== */
+
+.brochure-products {
+    padding: 45px 35px 35px;
+    background: #fffaf6;
+}
+
+.brochure-section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.brochure-section-title span {
+    color: #a94d71;
+
+    font-family: Georgia, serif;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.brochure-section-title p {
+    margin: 8px 0 0;
+
+    color: #9b7771;
+    font-size: 13px;
+}
+
+/* =====================================================
+   CATEGORY GRID
+===================================================== */
+
+.brochure-category-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 32px 22px;
+
+    align-items: stretch;
+}
+
+/* =====================================================
+   CATEGORY CARD
+===================================================== */
+
+.brochure-category-card {
+    position: relative;
+
+    margin-top: 15px;
+
+    padding: 25px 18px 20px;
+
+    border: 2px solid var(--category-color);
+    border-radius: 25px;
+
+    background: #fffdfb;
+
+    min-width: 0;
+
+    break-inside: avoid;
+    page-break-inside: avoid;
+
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.brochure-category-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+/* =====================================================
+   CATEGORY COLOURS
+===================================================== */
+
+.brochure-category-card.pink {
+    --category-color: #ed82a0;
+    --category-light: #ffe0e9;
+    --category-text: #ad426d;
+}
+
+.brochure-category-card.purple {
+    --category-color: #a36dbb;
+    --category-light: #ead9f2;
+    --category-text: #80539e;
+}
+
+.brochure-category-card.green {
+    --category-color: #83ad4c;
+    --category-light: #e3efce;
+    --category-text: #547e35;
+}
+
+.brochure-category-card.orange {
+    --category-color: #f4a13c;
+    --category-light: #ffebc8;
+    --category-text: #b76d19;
+}
+
+.brochure-category-card.turquoise {
+    --category-color: #43aaa7;
+    --category-light: #d5f0ed;
+    --category-text: #267d7b;
+}
+
+.brochure-category-card.blue {
+    --category-color: #709ec7;
+    --category-light: #dceafa;
+    --category-text: #467da7;
+}
+
+/* =====================================================
+   CATEGORY HEADER
+===================================================== */
+
+.brochure-category-header {
+    position: absolute;
+
+    top: -19px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 78%;
+    max-width: 90%;
+
+    text-align: center;
+}
+
+.brochure-category-header span {
+    display: block;
+
+    padding: 9px 15px;
+
+    border-radius: 35px;
+
+    background: var(--category-color);
+    color: white;
+
+    font-family: Georgia, serif;
+
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+
+    overflow-wrap: anywhere;
+
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================================================
+   FOOD ITEM LIST
+===================================================== */
+
+.brochure-item-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+
+    margin-top: 12px;
+}
+
+.brochure-item {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    color: #382c2b;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.brochure-item-name {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 9px;
+
+    min-width: 0;
+
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+.brochure-heart {
+    flex-shrink: 0;
+
+    color: var(--category-color);
+
+    font-size: 13px;
+}
+
+.brochure-item-price {
+    flex-shrink: 0;
+
+    color: #3d302e;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    text-align: right;
+}
+
+.brochure-item-price small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #957d76;
+
+    font-size: 10px;
+    font-weight: normal;
+}
+
+/* =====================================================
+   LOADING / ERROR / EMPTY
+===================================================== */
+
+.brochure-message,
+.brochure-error {
+    padding: 35px;
+
+    text-align: center;
+    font-size: 14px;
+}
+
+.brochure-message {
+    color: #92756d;
+}
+
+.brochure-error {
+    color: #dc2626;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.brochure-footer {
+    position: relative;
+
+    overflow: hidden;
+
+    margin-top: 30px;
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: #f7a0b6;
+
+    border-top: 5px solid #e77899;
+    border-bottom: 5px solid #e77899;
+
+    color: #4b1e27;
+}
+
+.brochure-footer h2 {
+    margin: 0 0 12px;
+
+    font-family: Georgia, serif;
+    font-style: italic;
+
+    font-size: 29px;
+}
+
+.brochure-footer p {
+    margin: 8px 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.brochure-footer-heart {
+    margin-top: 12px;
+
+    color: #c53f71;
+
+    font-size: 30px;
+}
+
+.brochure-footer-decoration {
+    position: absolute;
+
+    top: 10px;
+    right: 35px;
+
+    color: #d84c79;
+
+    font-size: 35px;
+}
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .food-brochure-page {
+        padding: 12px;
+    }
+
+    .brochure-cover {
+        min-height: 280px;
+        padding: 30px 15px;
+    }
+
+    .brochure-cover-content {
+        padding: 30px 18px;
+    }
+
+    .brochure-cover h1 {
+        font-size: 40px;
+    }
+
+    .brochure-ribbon {
+        font-size: 16px;
+        padding: 10px 22px;
+    }
+
+    .brochure-products {
+        padding: 35px 20px;
+    }
+
+    .brochure-category-grid {
+        gap: 30px 14px;
+    }
+
+    .brochure-category-card {
+        padding: 24px 12px 18px;
+    }
+
+    .brochure-category-header span {
+        font-size: 20px;
+        padding: 8px 10px;
+    }
+
+    .brochure-item {
+        font-size: 13px;
+    }
+
+    .brochure-item-price {
+        font-size: 13px;
+    }
+
+    .brochure-footer h2 {
+        font-size: 24px;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .food-brochure-page {
+        padding: 8px;
+    }
+
+    .brochure-actions button {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .brochure-cover {
+        padding: 25px 12px;
+    }
+
+    .brochure-cover-content {
+        padding: 28px 12px;
+        border-radius: 30px;
+    }
+
+    .brochure-cover h1 {
+        font-size: 34px;
+    }
+
+    .brochure-small-title {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .brochure-ribbon {
+        font-size: 14px;
+        padding: 9px 14px;
+    }
+
+    .brochure-intro {
+        font-size: 13px;
+    }
+
+    .brochure-decoration {
+        font-size: 35px;
+    }
+
+    .decoration-left {
+        left: 10px;
+    }
+
+    .decoration-right {
+        right: 10px;
+    }
+
+    .brochure-products {
+        padding: 30px 15px;
+    }
+
+    .brochure-section-title span {
+        font-size: 20px;
+    }
+
+    .brochure-category-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .brochure-category-card {
+        padding: 25px 18px 20px;
+    }
+
+    .brochure-category-header {
+        width: 65%;
+    }
+
+    .brochure-category-header span {
+        font-size: 22px;
+    }
+
+    .brochure-item {
+        font-size: 14px;
+    }
+
+    .brochure-footer {
+        padding: 28px 15px;
+    }
+
+    .brochure-footer h2 {
+        font-size: 21px;
+    }
+
+}
+
+/* =====================================================
+   PDF DOWNLOAD SUPPORT
+===================================================== */
+
+.food-brochure,
+.food-brochure * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.food-brochure {
+    background-color: #fffaf6;
+}
+
+/* Keep category cards together where possible */
+
+.brochure-category-card,
+.brochure-footer {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+/* Do not apply screen hover effects in PDF */
+
+@media print {
+
+    .brochure-category-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+}

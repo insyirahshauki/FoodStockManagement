@@ -31,7 +31,9 @@ const SideBar = ({ closeSidebar }) => {
             icon: "bi-basket",
             submenu: [
                 { title: "Food Categories", path: "/categories" },
-                { title: "Food Items", path: "/food-items" }
+                { title: "Food Items", path: "/food-items" },
+                { title: "Food Brochure", path: "/food-brochure" },
+                { title: "Food Catalog", path: "/food-catalog" }
             ]
         },
         {

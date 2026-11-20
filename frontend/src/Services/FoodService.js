@@ -1,20 +1,36 @@
+
 async function request(url, options = {}) {
+
+    const isFormData = options.body instanceof FormData;
+
+    const headers = {
+        ...(isFormData ? {} : {
+            "Content-Type": "application/json"
+        }),
+        ...options.headers
+    };
 
     const response = await fetch(
         `${process.env.REACT_APP_API_URL}${url}`,
         {
             ...options,
-            headers: {
-                "Content-Type": "application/json",
-                ...options.headers
-            }
+            headers
         }
     );
 
     const text = await response.text();
 
     if (!response.ok) {
-        throw new Error(text || `Request failed: ${response.status}`);
+        let message = text || `Request failed: ${response.status}`;
+
+        try {
+            const errorData = JSON.parse(text);
+            message = errorData.message || message;
+        } catch {
+            // Keep original error message
+        }
+
+        throw new Error(message);
     }
 
     if (!text) return null;
@@ -25,6 +41,7 @@ async function request(url, options = {}) {
         return text;
     }
 }
+
 
 export const FoodService = {
 
@@ -63,4 +80,19 @@ export const FoodService = {
         request(`/food-items/${id}`, {
             method: "DELETE"
         }),
+
+
+    uploadFoodItemImage: (id, file) => {
+
+        const formData = new FormData();
+
+        formData.append("file", file);
+
+        return request(`/food-items/${id}/image`, {
+            method: "POST",
+            body: formData
+        });
+    },
+
+
 };

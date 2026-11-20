@@ -17,7 +17,7 @@ const TopNavbar = ({ toggleSidebar }) => {
                 </span>
             </div>
 
-            <div className="dropdown">
+            {/* <div className="dropdown">
                 <button
                     className="btn btn-light dropdown-toggle"
                     data-bs-toggle="dropdown"
@@ -41,7 +41,7 @@ const TopNavbar = ({ toggleSidebar }) => {
                         </button>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </nav>
     );
 };

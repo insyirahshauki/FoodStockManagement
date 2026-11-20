@@ -9,5 +9,7 @@ public record FoodItemRequest(
         String unit,
         Integer minimumStock,
         BigDecimal costPrice,
-        BigDecimal sellingPrice
+        BigDecimal sellingPrice,
+        Boolean isActive,
+        String imageUrl
 ) {}

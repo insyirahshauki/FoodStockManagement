@@ -25,6 +25,8 @@ import AIExpiryRisk from "./Pages/AI/AIExpiryRisk";
 import AIProductionPlanning from "./Pages/AI/AIProductionPlanning";
 import AIBusinessAssistant from "./Pages/AI/AIBusinessAssistant";
 import AISmartAlerts from "./Pages/AI/AISmartAlerts";
+import FoodBrochure from "./Pages/Food/FoodBrochure";
+import FoodCatalog from "./Pages/Food/FoodCatalog";
 function App() {
     return (
         <BrowserRouter>
@@ -53,6 +55,8 @@ function App() {
                     <Route path="/ai-production-planning" element={<AIProductionPlanning />} />
                     <Route path="/ai-business-assistant" element={<AIBusinessAssistant />}/>
                     <Route path="/smart-alerts" element={<AISmartAlerts  />}/>
+                    <Route path="/food-brochure" element={<FoodBrochure />}/>
+                      <Route path="/food-catalog" element={<FoodCatalog />}/>
                     {/* Other pages will be added here */}
                 </Route>
             </Routes>

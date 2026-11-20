@@ -18,12 +18,12 @@ public class FoodCategoryService {
     }
 
     public List<FoodCategory> getAllCategories() {
-        return repository.findByIsActiveTrue();
+        return repository.findAll();
     }
 
     public FoodCategory getCategoryById(Integer id) {
         return repository.findById(id)
-                .filter(category -> Boolean.TRUE.equals(category.getIsActive()))
+               // .filter(category -> Boolean.TRUE.equals(category.getIsActive()))
                 .orElseThrow(() ->
                         new RuntimeException("Food category not found."));
     }
@@ -65,6 +65,7 @@ public class FoodCategoryService {
 
         existing.setCategoryName(name);
         existing.setDescription(request.getDescription());
+        existing.setIsActive(request.getIsActive());
 
         return repository.save(existing);
     }

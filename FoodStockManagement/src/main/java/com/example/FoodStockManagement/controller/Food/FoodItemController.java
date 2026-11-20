@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.http.MediaType;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/food-items")
@@ -58,4 +61,25 @@ public class FoodItemController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping(value = "/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadFoodItemImage(
+            @PathVariable Integer id,
+            @RequestParam("file") MultipartFile file) {
+
+        try {
+            FoodItemResponse response = service.uploadFoodItemImage(id, file);
+
+            return ResponseEntity.ok(response);
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(
+                    java.util.Map.of("message", e.getMessage()));
+
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().body(
+                    java.util.Map.of("message", "Image upload failed."));
+        }
+    }
+
 }

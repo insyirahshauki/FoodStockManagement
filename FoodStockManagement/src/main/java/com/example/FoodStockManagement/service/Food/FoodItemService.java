@@ -12,27 +12,35 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.FoodStockManagement.service.CloudinaryService;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import java.util.Map;
+
 @Service
 public class FoodItemService {
 
     private final FoodItemRepository foodItemRepository;
     private final FoodCategoryRepository categoryRepository;
     private final FoodPriceRepository priceRepository;
+    private final CloudinaryService cloudinaryService;
 
     public FoodItemService(
             FoodItemRepository foodItemRepository,
             FoodCategoryRepository categoryRepository,
-            FoodPriceRepository priceRepository) {
+            FoodPriceRepository priceRepository,
+            CloudinaryService cloudinaryService) {
 
         this.foodItemRepository = foodItemRepository;
         this.categoryRepository = categoryRepository;
         this.priceRepository = priceRepository;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Transactional(readOnly = true)
     public List<FoodItemResponse> getAllFoodItems() {
 
-        return foodItemRepository.findByIsActiveTrue()
+        return foodItemRepository.findAll()
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
@@ -67,14 +75,14 @@ public class FoodItemService {
         item.setUnit(request.unit().trim());
         item.setMinimumStock(request.minimumStock());
         item.setIsActive(true);
+        item.setImageUrl(request.imageUrl());
 
         FoodItem savedItem = foodItemRepository.save(item);
 
         saveNewPrice(
                 savedItem,
                 request.costPrice(),
-                request.sellingPrice()
-        );
+                request.sellingPrice());
 
         return mapToResponse(savedItem);
     }
@@ -102,14 +110,16 @@ public class FoodItemService {
         existing.setFoodName(request.foodName().trim());
         existing.setUnit(request.unit().trim());
         existing.setMinimumStock(request.minimumStock());
-
+        existing.setIsActive(request.isActive());
+        if (request.imageUrl() != null) {
+            existing.setImageUrl(request.imageUrl());
+        }
         FoodItem savedItem = foodItemRepository.save(existing);
 
         updatePriceIfChanged(
                 savedItem,
                 request.costPrice(),
-                request.sellingPrice()
-        );
+                request.sellingPrice());
 
         return mapToResponse(savedItem);
     }
@@ -128,8 +138,7 @@ public class FoodItemService {
 
         return foodItemRepository.findById(id)
                 .filter(item -> Boolean.TRUE.equals(item.getIsActive()))
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Food item not found."));
+                .orElseThrow(() -> new IllegalArgumentException("Food item not found."));
     }
 
     private FoodCategory getActiveCategory(Integer id) {
@@ -139,12 +148,9 @@ public class FoodItemService {
         }
 
         return categoryRepository.findById(id)
-                .filter(category ->
-                        Boolean.TRUE.equals(category.getIsActive()))
-                .orElseThrow(() ->
-                        new IllegalArgumentException(
-                                "Active food category not found."
-                        ));
+                .filter(category -> Boolean.TRUE.equals(category.getIsActive()))
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Active food category not found."));
     }
 
     private void validateRequest(FoodItemRequest request) {
@@ -167,8 +173,7 @@ public class FoodItemService {
 
         if (request.minimumStock() == null || request.minimumStock() < 0) {
             throw new IllegalArgumentException(
-                    "Minimum stock must be zero or greater."
-            );
+                    "Minimum stock must be zero or greater.");
         }
 
         validatePrice(request.costPrice(), "Cost price");
@@ -179,14 +184,12 @@ public class FoodItemService {
 
         if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException(
-                    fieldName + " must be zero or greater."
-            );
+                    fieldName + " must be zero or greater.");
         }
 
         if (price.scale() > 2) {
             throw new IllegalArgumentException(
-                    fieldName + " supports up to 2 decimal places."
-            );
+                    fieldName + " supports up to 2 decimal places.");
         }
     }
 
@@ -213,8 +216,7 @@ public class FoodItemService {
 
         FoodPrice currentPrice = priceRepository
                 .findFirstByFoodItemFoodItemIdAndEffectiveToIsNullOrderByEffectiveFromDesc(
-                        item.getFoodItemId()
-                )
+                        item.getFoodItemId())
                 .orElse(null);
 
         boolean changed = currentPrice == null
@@ -239,16 +241,17 @@ public class FoodItemService {
 
         FoodPrice price = priceRepository
                 .findFirstByFoodItemFoodItemIdAndEffectiveToIsNullOrderByEffectiveFromDesc(
-                        item.getFoodItemId()
-                )
+                        item.getFoodItemId())
                 .orElse(null);
 
-        return new FoodItemResponse(
+       return new FoodItemResponse(
                 item.getFoodItemId(),
                 item.getCategory() != null
-                        ? item.getCategory().getCategoryId() : null,
+                        ? item.getCategory().getCategoryId()
+                        : null,
                 item.getCategory() != null
-                        ? item.getCategory().getCategoryName() : null,
+                        ? item.getCategory().getCategoryName()
+                        : null,
                 item.getCode(),
                 item.getFoodName(),
                 item.getUnit(),
@@ -256,7 +259,44 @@ public class FoodItemService {
                 price != null ? price.getCostPrice() : BigDecimal.ZERO,
                 price != null ? price.getSellingPrice() : BigDecimal.ZERO,
                 item.getIsActive(),
-                item.getCreatedAt()
+                item.getCreatedAt(),
+                item.getImageUrl(),
+                item.getImagePublicId()
         );
+    }
+
+    @Transactional
+    public FoodItemResponse uploadFoodItemImage(
+            Integer id,
+            MultipartFile file) throws IOException {
+
+        FoodItem item = getActiveFoodItem(id);
+
+        // Upload new image first
+        Map result = cloudinaryService.uploadImage(file);
+
+        String newImageUrl = (String) result.get("secure_url");
+        String newPublicId = (String) result.get("public_id");
+
+        // Keep old image details until new upload succeeds
+        String oldPublicId = item.getImagePublicId();
+
+        item.setImageUrl(newImageUrl);
+        item.setImagePublicId(newPublicId);
+
+        FoodItem savedItem = foodItemRepository.save(item);
+
+        // Delete old image only after new image is saved
+        if (oldPublicId != null && !oldPublicId.isBlank()) {
+            try {
+                cloudinaryService.deleteImage(oldPublicId);
+            } catch (IOException e) {
+                // Log this failure; do not lose the newly saved image
+                System.err.println(
+                        "Unable to delete old Cloudinary image: " + oldPublicId);
+            }
+        }
+
+        return mapToResponse(savedItem);
     }
 }
