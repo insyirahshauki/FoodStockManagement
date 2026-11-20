@@ -799,7 +799,16 @@ function FoodItem() {
                                                         Select Unit
                                                     </option>
                                                     <option value="Pcs">Pcs</option>
+                                                    <option value="Pax">10pcs / Pax</option>
+                                                    <option value="Single">Single</option>
+                                                    <option value="Double">Double</option>
+                                                    <option value="Triple">Triple</option>
+                                                    <option value="Family">Family</option>
+                                                    <option value="BigFamily">Big Family</option>
                                                     <option value="Small">Small</option>
+                                                    <option value="Medium">Medium</option>
+                                                    <option value="Large">Large</option>
+                                                    <option value="XLParty">XL Party</option>
                                                     <option value="Big">Big</option>
                                                 </select>
                                             </div>
