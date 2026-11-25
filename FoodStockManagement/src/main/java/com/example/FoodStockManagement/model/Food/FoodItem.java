@@ -17,9 +17,6 @@ public class FoodItem {
     @JoinColumn(name = "CategoryID", nullable = false)
     private FoodCategory category;
 
-    @Column(name = "Code", nullable = false, length = 30)
-    private String code;
-
     @Column(name = "FoodName", nullable = false, length = 150)
     private String foodName;
 
@@ -53,14 +50,6 @@ public class FoodItem {
 
     public void setCategory(FoodCategory value) {
         category = value;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String value) {
-        code = value;
     }
 
     public String getFoodName() {

@@ -41,7 +41,6 @@ public class StockTransactionService {
                 transaction.getStockTransactionId(),
                 batch.getStockBatchId(),
                 foodItem.getFoodItemId(),
-                foodItem.getCode(),
                 foodItem.getFoodName(),
                 foodItem.getUnit(),
                 batch.getBatchNo(),

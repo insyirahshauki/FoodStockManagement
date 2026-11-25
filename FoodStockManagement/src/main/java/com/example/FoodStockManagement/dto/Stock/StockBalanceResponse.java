@@ -7,7 +7,6 @@ import java.util.List;
 
 public record StockBalanceResponse(
     Integer foodItemId,
-    String code,
     String foodName,
     String unit,
     Integer minimumStock,

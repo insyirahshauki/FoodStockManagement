@@ -47,7 +47,7 @@ function StockMovementReport() {
             const keyword = search.toLowerCase();
 
             result = result.filter(item =>
-                item.code?.toLowerCase().includes(keyword) ||
+                //item.code?.toLowerCase().includes(keyword) ||
                 item.foodName?.toLowerCase().includes(keyword) ||
                 item.batchNo?.toLowerCase().includes(keyword) ||
                 item.referenceNo?.toLowerCase().includes(keyword)
@@ -141,10 +141,10 @@ function StockMovementReport() {
             render: (row) => (
                 <div>
                     <strong>{row.foodName}</strong>
-                    <br />
+                    {/* <br />
                     <small className="text-muted">
                         {row.code}
-                    </small>
+                    </small> */}
                 </div>
             )
         },

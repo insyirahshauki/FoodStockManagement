@@ -44,15 +44,15 @@ const StockBalanceReport = () => {
     });
 
 const columns = [
-    {
-        key: "code",
-        label: "Code",
-        render: (row) => (
-            <span className="fw-semibold">
-                {row.code}
-            </span>
-        )
-    },
+    // {
+    //     key: "code",
+    //     label: "Code",
+    //     render: (row) => (
+    //         <span className="fw-semibold">
+    //             {row.code}
+    //         </span>
+    //     )
+    // },
     {
         key: "foodName",
         label: "Food Name"
@@ -121,7 +121,7 @@ const columns = [
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Search food item or code..."
+                                placeholder="Search food item ..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />

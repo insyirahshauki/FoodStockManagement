@@ -10,7 +10,7 @@ public interface FoodItemRepository extends JpaRepository<FoodItem, Integer> {
 
     List<FoodItem> findByIsActiveTrue();
 
-    boolean existsByCode(String code);
+    //boolean existsByCode(String code);
     Optional<FoodItem> findByFoodItemIdAndIsActiveTrue(Integer foodItemId);
     List<FoodItem> findByIsActiveTrueAndCategory_IsActiveTrue();
 }

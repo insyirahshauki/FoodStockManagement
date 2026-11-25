@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public record StockExpiryReportResponse(
         Integer stockBatchId,
         Integer foodItemId,
-        String code,
+        //String code,
         String foodName,
         String unit,
         String batchNo,

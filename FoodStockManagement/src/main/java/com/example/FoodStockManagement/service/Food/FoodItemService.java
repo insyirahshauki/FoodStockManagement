@@ -59,18 +59,17 @@ public class FoodItemService {
 
         validateRequest(request);
 
-        String code = request.code().trim();
+        // String code = request.code().trim();
 
-        if (foodItemRepository.existsByCode(code)) {
-            throw new IllegalArgumentException("Code already exists.");
-        }
+        // if (foodItemRepository.existsByCode(code)) {
+        //     throw new IllegalArgumentException("Code already exists.");
+        // }
 
         FoodCategory category = getActiveCategory(request.categoryId());
 
         FoodItem item = new FoodItem();
 
         item.setCategory(category);
-        item.setCode(code);
         item.setFoodName(request.foodName().trim());
         item.setUnit(request.unit().trim());
         item.setMinimumStock(request.minimumStock());
@@ -96,17 +95,17 @@ public class FoodItemService {
 
         FoodItem existing = getFoodItem(id);
 
-        String code = request.code().trim();
+       // String code = request.code().trim();
 
-        if (!existing.getCode().equalsIgnoreCase(code)
-                && foodItemRepository.existsByCode(code)) {
-            throw new IllegalArgumentException("Code already exists.");
-        }
+        // if (!existing.getCode().equalsIgnoreCase(code)
+        //         && foodItemRepository.existsByCode(code)) {
+        //     throw new IllegalArgumentException("Code already exists.");
+        // }
 
         FoodCategory category = getActiveCategory(request.categoryId());
 
         existing.setCategory(category);
-        existing.setCode(code);
+        //existing.setCode(code);
         existing.setFoodName(request.foodName().trim());
         existing.setUnit(request.unit().trim());
         existing.setMinimumStock(request.minimumStock());
@@ -166,9 +165,9 @@ public class FoodItemService {
             throw new IllegalArgumentException("Request is required.");
         }
 
-        if (request.code() == null || request.code().isBlank()) {
-            throw new IllegalArgumentException("Code is required.");
-        }
+        // if (request.code() == null || request.code().isBlank()) {
+        //     throw new IllegalArgumentException("Code is required.");
+        // }
 
         if (request.foodName() == null || request.foodName().isBlank()) {
             throw new IllegalArgumentException("Food name is required.");
@@ -259,7 +258,6 @@ public class FoodItemService {
                 item.getCategory() != null
                         ? item.getCategory().getCategoryName()
                         : null,
-                item.getCode(),
                 item.getFoodName(),
                 item.getUnit(),
                 item.getMinimumStock(),

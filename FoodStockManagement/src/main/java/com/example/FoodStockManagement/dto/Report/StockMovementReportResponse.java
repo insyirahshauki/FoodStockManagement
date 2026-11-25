@@ -6,7 +6,7 @@ public record StockMovementReportResponse(
         Integer stockTransactionId,
         LocalDateTime transactionDate,
         String transactionType,
-        String code,
+       // String code,
         String foodName,
         String unit,
         String batchNo,

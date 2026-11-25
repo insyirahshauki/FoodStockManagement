@@ -54,8 +54,9 @@ const StockBalance = () => {
             const keyword = search.toLowerCase();
 
             const matchesSearch =
-                (item.foodName || "").toLowerCase().includes(keyword) ||
-                (item.code || "").toLowerCase().includes(keyword);
+                (item.foodName || "").toLowerCase().includes(keyword) ;
+                //||
+                //(item.code || "").toLowerCase().includes(keyword);
 
             const matchesStatus =
                 statusFilter === "ALL" ||
@@ -99,10 +100,10 @@ const StockBalance = () => {
     };
 
     const columns = [
-        {
-            key: "code",
-            label: "Code"
-        },
+        // {
+        //     key: "code",
+        //     label: "Code"
+        // },
         {
             key: "foodName",
             label: "Food Item",
@@ -265,7 +266,7 @@ const StockBalance = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Search Code or food name..."
+                                        placeholder="Search food name..."
                                         value={search}
                                         onChange={e => setSearch(e.target.value)}
                                     />
@@ -324,7 +325,7 @@ const StockBalance = () => {
                                 <div>
                                     <h5 className="mb-1">Batch Details</h5>
                                     <small className="text-muted">
-                                        {selectedItem.code} - {selectedItem.foodName}
+                                         {selectedItem.foodName}
                                     </small>
                                 </div>
 

@@ -12,8 +12,7 @@ public interface ReportRepository extends JpaRepository<StockBatch, Integer> {
 
     @Query("""
             SELECT
-                f.foodItemId,
-                f.code,
+                f.foodItemId,           
                 f.foodName,
                 f.unit,
                 COALESCE(SUM(b.quantityRemaining), 0),
@@ -24,7 +23,6 @@ public interface ReportRepository extends JpaRepository<StockBatch, Integer> {
             WHERE f.isActive = true
             GROUP BY
                 f.foodItemId,
-                f.code,
                 f.foodName,
                 f.unit,
                 f.minimumStock
@@ -37,7 +35,6 @@ public interface ReportRepository extends JpaRepository<StockBatch, Integer> {
                 t.stockTransactionId,
                 t.transactionDate,
                 t.transactionType,
-                f.code,
                 f.foodName,
                 f.unit,
                 b.batchNo,
@@ -55,7 +52,6 @@ public interface ReportRepository extends JpaRepository<StockBatch, Integer> {
             SELECT
                 b.stockBatchId,
                 f.foodItemId,
-                f.code,
                 f.foodName,
                 f.unit,
                 b.batchNo,

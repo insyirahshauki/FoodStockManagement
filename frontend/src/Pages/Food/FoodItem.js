@@ -7,7 +7,7 @@ import TableActions from "../../components/common/TableActions";
 
 const initialForm = {
     categoryId: "",
-    code: "",
+   // code: "",
     foodName: "",
     unit: "",
     minimumStock: 0,
@@ -102,7 +102,7 @@ function FoodItem() {
 
         setFormData({
             categoryId: String(item.categoryId || ""),
-            code: item.code || "",
+            //code: item.code || "",
             foodName: item.foodName || "",
             unit: item.unit || "",
             minimumStock: item.minimumStock ?? 0,
@@ -170,10 +170,10 @@ function FoodItem() {
             return;
         }
 
-        if (!formData.code.trim() || !formData.foodName.trim()) {
-            setError("Code and food name are required.");
-            return;
-        }
+        // if (!formData.code.trim() || !formData.foodName.trim()) {
+        //     setError("Code and food name are required.");
+        //     return;
+        // }
 
         if (!formData.unit.trim()) {
             setError("Unit is required.");
@@ -228,7 +228,7 @@ function FoodItem() {
 
         const requestData = {
             categoryId: Number(formData.categoryId),
-            code: formData.code.trim(),
+           // code: formData.code.trim(),
             foodName: formData.foodName.trim(),
             unit: formData.unit.trim(),
             minimumStock: Number(formData.minimumStock),
@@ -339,8 +339,9 @@ function FoodItem() {
         const keyword = search.toLowerCase();
 
         const matchesSearch =
-            item.foodName?.toLowerCase().includes(keyword) ||
-            item.code?.toLowerCase().includes(keyword);
+            item.foodName?.toLowerCase().includes(keyword) 
+            //||
+            //item.code?.toLowerCase().includes(keyword);
 
         const matchesCategory =
             !categoryFilter ||
@@ -389,15 +390,15 @@ function FoodItem() {
                 )
             )
         },
-        {
-            key: "code",
-            label: "Code",
-            render: (row) => (
-                <span className="fw-semibold">
-                    {row.code}
-                </span>
-            )
-        },
+        // {
+        //     key: "code",
+        //     label: "Code",
+        //     render: (row) => (
+        //         <span className="fw-semibold">
+        //             {row.code}
+        //         </span>
+        //     )
+        // },
         {
             key: "foodName",
             label: "Food Name"
@@ -545,7 +546,7 @@ function FoodItem() {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Search Code or food name..."
+                                        placeholder="Search food name..."
                                         value={search}
                                         onChange={(e) => setSearch(e.target.value)}
                                     />
@@ -748,7 +749,7 @@ function FoodItem() {
                                             </div>
 
                                             {/* Code */}
-                                            <div className="col-md-6">
+                                            {/* <div className="col-md-6">
                                                 <label className="form-label fw-semibold">
                                                     Code <span className="text-danger">*</span>
                                                 </label>
@@ -763,7 +764,7 @@ function FoodItem() {
                                                     maxLength="50"
                                                     required
                                                 />
-                                            </div>
+                                            </div> */}
 
                                             {/* Food Name */}
                                             <div className="col-md-12">

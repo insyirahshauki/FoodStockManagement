@@ -39,9 +39,9 @@ public class ReportService {
                 .stream()
                 .map(row -> {
 
-                    Integer currentStock = ((Number) row[4]).intValue();
+                    Integer currentStock = ((Number) row[3]).intValue();
 
-                    Integer minimumStock = ((Number) row[5]).intValue();
+                    Integer minimumStock = ((Number) row[4]).intValue();
 
                     String status;
 
@@ -57,7 +57,6 @@ public class ReportService {
                             ((Number) row[0]).intValue(),
                             (String) row[1],
                             (String) row[2],
-                            (String) row[3],
                             currentStock,
                             minimumStock,
                             status);
@@ -74,13 +73,13 @@ public class ReportService {
                         ((Number) row[0]).intValue(),
                         (LocalDateTime) row[1],
                         (String) row[2],
+                        //(String) row[3],
                         (String) row[3],
                         (String) row[4],
                         (String) row[5],
-                        (String) row[6],
-                        ((Number) row[7]).intValue(),
-                        (String) row[8],
-                        (String) row[9]))
+                        ((Number) row[6]).intValue(),
+                        (String) row[7],
+                        (String) row[8]))
                 .toList();
     }
 
@@ -113,11 +112,11 @@ public class ReportService {
                             ((Number) row[0]).intValue(),
                             ((Number) row[1]).intValue(),
                             (String) row[2],
+                           // (String) row[3],
                             (String) row[3],
                             (String) row[4],
-                            (String) row[5],
                             expiryDate,
-                            ((Number) row[7]).intValue(),
+                            ((Number) row[6]).intValue(),
                             expiryStatus,
                             daysRemaining);
                 })

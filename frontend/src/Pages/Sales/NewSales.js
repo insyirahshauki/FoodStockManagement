@@ -402,7 +402,7 @@ const NewSales = () => {
                                                                         key={food.foodItemId}
                                                                         value={food.foodItemId}
                                                                     >
-                                                                        {food.code} - {food.foodName}
+                                                                         {food.foodName}
                                                                     </option>
                                                                 ))}
                                                             </select>

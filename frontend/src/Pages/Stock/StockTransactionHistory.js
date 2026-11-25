@@ -51,7 +51,7 @@ const StockTransactionHistory = () => {
 
             const matchesSearch = [
                 transaction.foodName,
-                transaction.code,
+                //transaction.code,
                 transaction.batchNo,
                 //transaction.referenceNo,
                 transaction.notes
@@ -113,9 +113,7 @@ const StockTransactionHistory = () => {
                 <div>
                     <strong>{row.foodName}</strong>
 
-                    <small className="d-block text-muted">
-                        {row.code}
-                    </small>
+              
                 </div>
             )
         },
@@ -257,7 +255,7 @@ const StockTransactionHistory = () => {
                                     <i className="bi bi-search"></i>
                                     <input
                                         type="text"
-                                        placeholder="Search food, code, batch..."
+                                        placeholder="Search food, batch..."
                                         value={searchTerm}
                                         onChange={e => setSearchTerm(e.target.value)}
                                     />

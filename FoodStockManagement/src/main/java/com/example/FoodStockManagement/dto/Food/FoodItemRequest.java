@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public record FoodItemRequest(
         Integer categoryId,
-        String code,
+       // String code,
         String foodName,
         String unit,
         Integer minimumStock,

@@ -6,7 +6,6 @@ public record StockTransactionResponse(
     Integer stockTransactionId,
     Integer stockBatchId,
     Integer foodItemId,
-    String code,
     String foodName,
     String unit,
     String batchNo,

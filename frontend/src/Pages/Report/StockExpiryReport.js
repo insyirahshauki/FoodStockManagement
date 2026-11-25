@@ -54,7 +54,7 @@ function StockExpiryReport() {
             const keyword = search.toLowerCase();
 
             result = result.filter(item =>
-                item.code?.toLowerCase().includes(keyword) ||
+               // item.code?.toLowerCase().includes(keyword) ||
                 item.foodName?.toLowerCase().includes(keyword) ||
                 item.batchNo?.toLowerCase().includes(keyword)
             );
@@ -116,9 +116,7 @@ function StockExpiryReport() {
                 <div>
                     <strong>{row.foodName}</strong>
                     <br />
-                    <small className="text-muted">
-                        {row.code}
-                    </small>
+                  
                 </div>
             )
         },

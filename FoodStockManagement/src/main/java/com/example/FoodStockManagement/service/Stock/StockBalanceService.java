@@ -80,7 +80,6 @@ public class StockBalanceService {
 
             result.add(new StockBalanceResponse(
                 item.getFoodItemId(),
-                item.getCode(),
                 item.getFoodName(),
                 item.getUnit(),
                 item.getMinimumStock(),

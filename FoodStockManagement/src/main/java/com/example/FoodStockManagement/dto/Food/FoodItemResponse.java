@@ -8,7 +8,6 @@ public record FoodItemResponse(
         Integer foodItemId,
         Integer categoryId,
         String categoryName,
-        String code,
         String foodName,
         String unit,
         Integer minimumStock,

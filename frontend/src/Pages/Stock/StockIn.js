@@ -165,7 +165,7 @@ const StockIn = () => {
                                                     key={item.foodItemId}
                                                     value={item.foodItemId}
                                                 >
-                                                    {item.code} - {item.foodName}
+                                                     {item.foodName}
                                                 </option>
                                             ))}
                                         </select>

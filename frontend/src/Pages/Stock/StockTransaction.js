@@ -51,7 +51,7 @@ const StockTransaction = () => {
 
         const matchesSearch =
             (transaction.foodName || "").toLowerCase().includes(keyword) ||
-            (transaction.code || "").toLowerCase().includes(keyword) ||
+           // (transaction.code || "").toLowerCase().includes(keyword) ||
             (transaction.batchNo || "").toLowerCase().includes(keyword) 
             // ||
             // (transaction.referenceNo || "").toLowerCase().includes(keyword)
@@ -119,9 +119,7 @@ const StockTransaction = () => {
                         {row.foodName}
                     </div>
 
-                    <small className="text-muted">
-                        {row.code}
-                    </small>
+              
                 </div>
             )
         },
@@ -256,7 +254,7 @@ const StockTransaction = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Search product, code, or batch..."
+                                        placeholder="Search product, or batch..."
                                         value={search}
                                         onChange={(e) => setSearch(e.target.value)}
                                     />

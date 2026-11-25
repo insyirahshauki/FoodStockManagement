@@ -71,7 +71,6 @@ public class ExpiryManagementService {
         return new ExpiryManagementResponse(
                 batch.getStockBatchId(),
                 batch.getFoodItem().getFoodItemId(),
-                batch.getFoodItem().getCode(),
                 batch.getFoodItem().getFoodName(),
                 batch.getFoodItem().getUnit(),
                 batch.getBatchNo(),
