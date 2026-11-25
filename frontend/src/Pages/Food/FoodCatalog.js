@@ -117,99 +117,113 @@ const FoodCatalog = () => {
     // DOWNLOAD PDF
     // =========================
 
-    const handleDownload = async () => {
+  
+const handleDownload = async () => {
 
-        if (!brochureRef.current || downloading) {
-            return;
+    if (!brochureRef.current || downloading) {
+        return;
+    }
+
+    const element = brochureRef.current;
+
+    try {
+
+        setDownloading(true);
+
+        // Activate PDF-specific design
+        element.classList.add("brochure-print-mode");
+
+        // Wait for CSS layout to update
+        await new Promise(resolve =>
+            requestAnimationFrame(() =>
+                requestAnimationFrame(resolve)
+            )
+        );
+
+        // Wait for fonts
+        if (document.fonts?.ready) {
+            await document.fonts.ready;
         }
 
-        try {
+        // Wait for images
+        const images = Array.from(
+            element.querySelectorAll("img")
+        );
 
-            setDownloading(true);
-
-            const element = brochureRef.current;
-
-            // Wait for images and fonts
-            if (document.fonts?.ready) {
-                await document.fonts.ready;
-            }
-
-            const images = Array.from(
-                element.querySelectorAll("img")
-            );
-
-            await Promise.all(
-                images.map(img => {
-
-                    if (img.complete) {
-                        return Promise.resolve();
-                    }
-
-                    return new Promise(resolve => {
-                        img.onload = resolve;
-                        img.onerror = resolve;
-                    });
-
-                })
-            );
-
-            const options = {
-
-                margin: [8, 8, 8, 8],
-
-                filename: "Homemade-Food-Catalogue.pdf",
-
-                image: {
-                    type: "jpeg",
-                    quality: 0.98
-                },
-
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: "#fffaf6",
-                    logging: false,
-                    windowWidth: 1000,
-                    scrollX: 0,
-                    scrollY: 0
-                },
-
-                jsPDF: {
-                    unit: "mm",
-                    format: "a4",
-                    orientation: "portrait"
-                },
-
-                pagebreak: {
-                    mode: ["css", "legacy"],
-                    avoid: [
-                        ".brochure-category-card",
-                        ".brochure-footer"
-                    ]
+        await Promise.all(
+            images.map(img => {
+                if (img.complete) {
+                    return Promise.resolve();
                 }
 
-            };
+                return new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
+            })
+        );
 
-            await html2pdf()
-                .set(options)
-                .from(element)
-                .save();
+        const options = {
 
-        } catch (err) {
+            margin: [8, 8, 8, 8],
 
-            console.error("PDF download error:", err);
+            filename: "Homemade-Food-Catalogue.pdf",
 
-            alert(
-                "Unable to download brochure. Please try again."
-            );
+            image: {
+                type: "jpeg",
+                quality: 0.98
+            },
 
-        } finally {
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#fffaf6",
+                logging: false,
+                windowWidth: 1000,
+                scrollX: 0,
+                scrollY: 0
+            },
 
-            setDownloading(false);
+            jsPDF: {
+                unit: "mm",
+                format: "a4",
+                orientation: "portrait"
+            },
 
-        }
+            pagebreak: {
+                mode: ["css", "legacy"],
+                avoid: [
+                    ".brochure-category-card",
+                    ".brochure-footer"
+                ]
+            }
 
-    };
+        };
+
+        await html2pdf()
+            .set(options)
+            .from(element)
+            .save();
+
+    } catch (err) {
+
+        console.error("PDF download error:", err);
+
+        alert(
+            "Unable to download brochure. Please try again."
+        );
+
+    } finally {
+
+        // Restore original screen design
+        element.classList.remove("brochure-print-mode");
+
+        setDownloading(false);
+
+    }
+
+};
+
 
 
     // =========================
