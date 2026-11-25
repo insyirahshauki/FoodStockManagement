@@ -93,6 +93,7 @@ export const FoodService = {
             body: formData
         });
     },
-
+    getActiveFoodItemsForCatalogue: () =>
+        request("/food-items/catalogue"),
 
 };

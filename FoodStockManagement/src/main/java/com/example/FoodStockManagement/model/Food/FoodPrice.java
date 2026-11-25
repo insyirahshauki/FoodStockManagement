@@ -13,7 +13,7 @@ public class FoodPrice {
     @Column(name = "FoodPriceID")
     private Integer foodPriceId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "FoodItemID", nullable = false)
     private FoodItem foodItem;
 

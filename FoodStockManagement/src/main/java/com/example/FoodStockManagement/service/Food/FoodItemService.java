@@ -94,7 +94,7 @@ public class FoodItemService {
 
         validateRequest(request);
 
-        FoodItem existing = getActiveFoodItem(id);
+        FoodItem existing = getFoodItem(id);
 
         String code = request.code().trim();
 
@@ -127,11 +127,18 @@ public class FoodItemService {
     @Transactional
     public void deleteFoodItem(Integer id) {
 
-        FoodItem item = getActiveFoodItem(id);
+        FoodItem item = getFoodItem(id);
 
         item.setIsActive(false);
 
         foodItemRepository.save(item);
+    }
+
+    private FoodItem getFoodItem(Integer id) {
+
+        return foodItemRepository.findById(id)
+
+                .orElseThrow(() -> new IllegalArgumentException("Food item not found."));
     }
 
     private FoodItem getActiveFoodItem(Integer id) {
@@ -244,7 +251,7 @@ public class FoodItemService {
                         item.getFoodItemId())
                 .orElse(null);
 
-       return new FoodItemResponse(
+        return new FoodItemResponse(
                 item.getFoodItemId(),
                 item.getCategory() != null
                         ? item.getCategory().getCategoryId()
@@ -261,8 +268,7 @@ public class FoodItemService {
                 item.getIsActive(),
                 item.getCreatedAt(),
                 item.getImageUrl(),
-                item.getImagePublicId()
-        );
+                item.getImagePublicId());
     }
 
     @Transactional
@@ -298,5 +304,15 @@ public class FoodItemService {
         }
 
         return mapToResponse(savedItem);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FoodItemResponse> getActiveFoodItemsForCatalogue() {
+
+        return foodItemRepository
+                .findByIsActiveTrueAndCategory_IsActiveTrue()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 }

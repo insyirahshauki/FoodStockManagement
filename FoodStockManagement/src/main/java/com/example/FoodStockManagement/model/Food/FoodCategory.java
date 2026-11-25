@@ -3,8 +3,11 @@ package com.example.FoodStockManagement.model.Food;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "FoodCategory")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FoodCategory {
 
     @Id

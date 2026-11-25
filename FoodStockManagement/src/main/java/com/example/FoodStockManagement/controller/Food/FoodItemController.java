@@ -2,6 +2,7 @@ package com.example.FoodStockManagement.controller.Food;
 
 import com.example.FoodStockManagement.dto.Food.FoodItemRequest;
 import com.example.FoodStockManagement.dto.Food.FoodItemResponse;
+import com.example.FoodStockManagement.model.Food.FoodItem;
 import com.example.FoodStockManagement.service.Food.FoodItemService;
 
 import org.springframework.http.HttpStatus;
@@ -82,4 +83,10 @@ public class FoodItemController {
         }
     }
 
+    @GetMapping("/catalogue")
+    public ResponseEntity<List<FoodItemResponse>> getActiveFoodItemsForCatalogue() {
+
+        return ResponseEntity.ok(
+                service.getActiveFoodItemsForCatalogue());
+    }
 }

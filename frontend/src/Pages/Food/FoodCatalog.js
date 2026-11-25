@@ -41,35 +41,22 @@ const FoodCatalog = () => {
     }, []);
 
     const loadFoodItems = async () => {
-
         try {
-
             setLoading(true);
             setError("");
 
-            const data = await FoodService.getFoodItems();
+            const response = await FoodService.getActiveFoodItemsForCatalogue();
 
-            const items = Array.isArray(data) ? data : [];
+            // await FoodService.getActiveFoodItemsForCatalogue();
 
-            // Only active food items
-            const activeItems = items.filter(
-                item => item.isActive === true
-            );
-
-            setFoodItems(activeItems);
+            setFoodItems(response);
 
         } catch (err) {
-
             console.error("Error loading food items:", err);
-
-            setError("Failed to load food items.");
-
+            setError("Failed to load food catalogue.");
         } finally {
-
             setLoading(false);
-
         }
-
     };
 
 
@@ -93,15 +80,8 @@ const FoodCatalog = () => {
     // =========================
     // GET CATEGORY NAME
     // =========================
-
     const getCategoryName = (item) => {
-
-        return (
-            item.category?.categoryName ||
-            item.categoryName ||
-            "Other"
-        );
-
+        return item.categoryName || "Other";
     };
 
 
@@ -109,22 +89,20 @@ const FoodCatalog = () => {
     // GROUP FOOD ITEMS
     // =========================
 
-    const groupedFoodItems = foodItems.reduce(
-        (groups, item) => {
+    const groupedFoodItems = foodItems.reduce((groups, item) => {
+        const categoryName =
+            item.category?.categoryName ||
+            item.categoryName ||
+            "Other";
 
-            const categoryName = getCategoryName(item);
+        if (!groups[categoryName]) {
+            groups[categoryName] = [];
+        }
 
-            if (!groups[categoryName]) {
-                groups[categoryName] = [];
-            }
+        groups[categoryName].push(item);
 
-            groups[categoryName].push(item);
-
-            return groups;
-
-        },
-        {}
-    );
+        return groups;
+    }, {});
 
 
     // =========================
@@ -315,11 +293,11 @@ const FoodCatalog = () => {
                         </p>
 
 
-                        <h1>
+                        <h3>
                             Homemade
                             <br />
                             Food Catalogue
-                        </h1>
+                        </h3>
 
 
                         <div className="brochure-ribbon">
@@ -414,11 +392,10 @@ const FoodCatalog = () => {
                                     ([category, items], index) => (
 
                                         <div
-                                            className={`brochure-category-card ${
-                                                categoryColors[
-                                                    index % categoryColors.length
-                                                ]
-                                            }`}
+                                            className={`brochure-category-card ${categoryColors[
+                                                index % categoryColors.length
+                                            ]
+                                                }`}
                                             key={category}
                                         >
 

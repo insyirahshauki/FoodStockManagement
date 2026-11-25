@@ -77,11 +77,14 @@
 .brochure-cover {
     position: relative;
     overflow: hidden;
-    min-height: 320px;
+
+    min-height: 220px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 45px 25px;
+
+    padding: 25px 20px;
 
     text-align: center;
 
@@ -117,25 +120,26 @@
     z-index: 1;
 
     width: 100%;
-    max-width: 750px;
+    max-width: 650px;
 
     margin: auto;
-    padding: 35px 25px;
+
+    padding: 20px 20px;
 
     border: 3px solid #f4bd75;
-    border-radius: 45px;
+    border-radius: 30px;
 
     background: rgba(255, 250, 244, 0.96);
 
     outline: 2px dashed #e9a3a3;
-    outline-offset: -12px;
+    outline-offset: -10px;
 }
 
 .brochure-logo {
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
 
-    margin: 0 auto 10px;
+    margin: 0 auto 7px;
 
     display: flex;
     align-items: center;
@@ -146,17 +150,17 @@
     background: #ffe0e9;
     color: #db5284;
 
-    font-size: 38px;
+    font-size: 28px;
 }
 
 .brochure-small-title {
-    margin: 0 0 12px;
+    margin: 0 0 8px;
 
     color: #b66c64;
 
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 800;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
 
 .brochure-cover h1 {
@@ -167,17 +171,17 @@
     font-family: Georgia, serif;
     font-style: italic;
 
-    font-size: clamp(35px, 6vw, 62px);
+    font-size: clamp(30px, 4vw, 48px);
     font-weight: 800;
 
-    line-height: 1.08;
+    line-height: 1.05;
 }
 
 .brochure-ribbon {
     display: inline-block;
 
-    margin: 22px auto 12px;
-    padding: 12px 35px;
+    margin: 12px auto 8px;
+    padding: 8px 25px;
 
     border-radius: 8px;
 
@@ -185,27 +189,27 @@
     color: #541e2b;
 
     font-family: Georgia, serif;
-    font-size: 20px;
+    font-size: 16px;
     font-style: italic;
     font-weight: bold;
 }
 
 .brochure-intro {
-    max-width: 500px;
+    max-width: 450px;
 
-    margin: 12px auto;
+    margin: 8px auto;
 
     color: #805b51;
 
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.4;
 }
 
 .brochure-flower {
-    margin-top: 15px;
+    margin-top: 8px;
 
     color: #d46c91;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 /* Decorative Hearts */
@@ -240,23 +244,21 @@
 
 .brochure-section-title {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .brochure-section-title span {
     color: #a94d71;
-
     font-family: Georgia, serif;
-    font-size: 25px;
+    font-size: 21px;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
 .brochure-section-title p {
-    margin: 8px 0 0;
-
+    margin: 5px 0 0;
     color: #9b7771;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 /* =====================================================
@@ -265,11 +267,8 @@
 
 .brochure-category-grid {
     display: grid;
-
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 32px 22px;
-
+    gap: 22px 18px;
     align-items: stretch;
 }
 
@@ -279,22 +278,17 @@
 
 .brochure-category-card {
     position: relative;
-
-    margin-top: 15px;
-
-    padding: 25px 18px 20px;
+    margin-top: 12px;
+    padding: 20px 15px 15px;
 
     border: 2px solid var(--category-color);
-    border-radius: 25px;
+    border-radius: 20px;
 
     background: #fffdfb;
-
     min-width: 0;
 
     break-inside: avoid;
     page-break-inside: avoid;
-
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .brochure-category-card:hover {
@@ -349,22 +343,18 @@
 
 .brochure-category-header {
     position: absolute;
-
-    top: -19px;
+    top: -16px;
     left: 50%;
-
     transform: translateX(-50%);
 
     width: 78%;
     max-width: 90%;
-
     text-align: center;
 }
 
 .brochure-category-header span {
     display: block;
-
-    padding: 9px 15px;
+    padding: 7px 12px;
 
     border-radius: 35px;
 
@@ -372,14 +362,11 @@
     color: white;
 
     font-family: Georgia, serif;
-
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     font-style: italic;
 
     overflow-wrap: anywhere;
-
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* =====================================================
@@ -482,57 +469,56 @@
 
 .brochure-footer {
     position: relative;
-
     overflow: hidden;
 
-    margin-top: 30px;
-    padding: 35px 20px;
+    margin-top: 15px;
+    padding: 20px 15px;
 
     text-align: center;
 
     background: #f7a0b6;
 
-    border-top: 5px solid #e77899;
-    border-bottom: 5px solid #e77899;
+    border-top: 3px solid #e77899;
+    border-bottom: 3px solid #e77899;
 
     color: #4b1e27;
 }
 
 .brochure-footer h2 {
-    margin: 0 0 12px;
+    margin: 0 0 6px;
 
     font-family: Georgia, serif;
     font-style: italic;
 
-    font-size: 29px;
+    font-size: 21px;
 }
 
 .brochure-footer p {
-    margin: 8px 0;
+    margin: 5px 0;
 
     font-family: Georgia, serif;
 
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 }
 
 .brochure-footer-heart {
-    margin-top: 12px;
+    margin-top: 5px;
 
     color: #c53f71;
 
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .brochure-footer-decoration {
     position: absolute;
 
-    top: 10px;
-    right: 35px;
+    top: 5px;
+    right: 20px;
 
     color: #d84c79;
 
-    font-size: 35px;
+    font-size: 25px;
 }
 
 /* =====================================================
@@ -563,9 +549,10 @@
         padding: 10px 22px;
     }
 
-    .brochure-products {
-        padding: 35px 20px;
-    }
+  .brochure-products {
+    padding: 25px 25px 20px;
+    background: #fffaf6;
+}
 
     .brochure-category-grid {
         gap: 30px 14px;

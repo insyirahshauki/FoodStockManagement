@@ -1,6 +1,7 @@
 package com.example.FoodStockManagement.model.Food;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -39,6 +40,8 @@ public class FoodItem {
 
     @Column(name = "ImagePublicId", length = 255)
     private String imagePublicId;
+    @OneToMany(mappedBy = "foodItem")
+    private List<FoodPrice> foodPrices;
 
     public Integer getFoodItemId() {
         return foodItemId;
@@ -111,4 +114,5 @@ public class FoodItem {
     public void setImagePublicId(String imagePublicId) {
         this.imagePublicId = imagePublicId;
     }
+
 }
