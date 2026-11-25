@@ -77,12 +77,12 @@ const FoodCatalog = () => {
     };
 
 
-    // =========================
-    // GET CATEGORY NAME
-    // =========================
-    const getCategoryName = (item) => {
-        return item.categoryName || "Other";
-    };
+    // // =========================
+    // // GET CATEGORY NAME
+    // // =========================
+    // const getCategoryName = (item) => {
+    //     return item.categoryName || "Other";
+    // };
 
 
     // =========================
