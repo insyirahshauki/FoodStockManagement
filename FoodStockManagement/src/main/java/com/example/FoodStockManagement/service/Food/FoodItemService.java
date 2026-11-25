@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 import com.example.FoodStockManagement.service.CloudinaryService;
@@ -307,10 +308,11 @@ public class FoodItemService {
     @Transactional(readOnly = true)
     public List<FoodItemResponse> getActiveFoodItemsForCatalogue() {
 
-        return foodItemRepository
-                .findByIsActiveTrueAndCategory_IsActiveTrue()
-                .stream()
-                .map(this::mapToResponse)
-                .toList();
+     return foodItemRepository
+        .findByIsActiveTrueAndCategory_IsActiveTrue()
+        .stream()
+        .sorted(Comparator.comparing(FoodItem::getFoodItemId))
+        .map(this::mapToResponse)
+        .toList();
     }
 }

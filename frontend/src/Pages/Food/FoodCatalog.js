@@ -297,9 +297,9 @@ const handleDownload = async () => {
 
                     <div className="brochure-cover-content">
 
-                        <div className="brochure-logo">
+                        {/* <div className="brochure-logo">
                             ♡
-                        </div>
+                        </div> */}
 
 
                         <p className="brochure-small-title">
@@ -325,9 +325,9 @@ const handleDownload = async () => {
                         </p>
 
 
-                        <div className="brochure-flower">
+                        {/* <div className="brochure-flower">
                             ✿　♡　✿
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -514,9 +514,9 @@ const handleDownload = async () => {
                     </p>
 
 
-                    <div className="brochure-footer-heart">
+                    {/* <div className="brochure-footer-heart">
                         ♡
-                    </div>
+                    </div> */}
 
                 </section>
 

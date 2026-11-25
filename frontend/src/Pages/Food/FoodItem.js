@@ -7,7 +7,7 @@ import TableActions from "../../components/common/TableActions";
 
 const initialForm = {
     categoryId: "",
-   // code: "",
+    // code: "",
     foodName: "",
     unit: "",
     minimumStock: 0,
@@ -228,7 +228,7 @@ function FoodItem() {
 
         const requestData = {
             categoryId: Number(formData.categoryId),
-           // code: formData.code.trim(),
+            // code: formData.code.trim(),
             foodName: formData.foodName.trim(),
             unit: formData.unit.trim(),
             minimumStock: Number(formData.minimumStock),
@@ -339,9 +339,9 @@ function FoodItem() {
         const keyword = search.toLowerCase();
 
         const matchesSearch =
-            item.foodName?.toLowerCase().includes(keyword) 
-            //||
-            //item.code?.toLowerCase().includes(keyword);
+            item.foodName?.toLowerCase().includes(keyword)
+        //||
+        //item.code?.toLowerCase().includes(keyword);
 
         const matchesCategory =
             !categoryFilter ||
@@ -809,8 +809,10 @@ function FoodItem() {
                                                     <option value="Small">Small</option>
                                                     <option value="Medium">Medium</option>
                                                     <option value="Large">Large</option>
-                                                    <option value="XLParty">XL Party</option>
+                                                    <option value="XL Party">XL Party</option>
                                                     <option value="Big">Big</option>
+                                                    <option value="6`">6`</option>
+                                                    <option value="8`">8`</option>
                                                 </select>
                                             </div>
 
